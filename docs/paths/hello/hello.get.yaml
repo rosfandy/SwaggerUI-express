@@ -1,0 +1,16 @@
+get:
+  tags:
+    - Hello World
+  summary: Hello World
+  description: Mengembalikan pesan Hello World
+  responses:
+    "200":
+      description: Berhasil
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Hello, world!
