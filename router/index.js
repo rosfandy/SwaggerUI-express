@@ -6,7 +6,6 @@ const path = require("path");
 
 const swaggerRouter = express.Router();
 
-// Function to find swagger file in multiple possible locations
 function findSwaggerFile() {
   const possiblePaths = [
     path.join(__dirname, "../docs/bundled.yaml"),
@@ -26,7 +25,6 @@ function findSwaggerFile() {
   throw new Error("❌ Swagger YAML file not found in any expected location");
 }
 
-// Debug endpoint to check file system structure
 swaggerRouter.get("/debug", (req, res) => {
   const currentDir = __dirname;
   const parentDir = path.join(__dirname, "..");
@@ -59,11 +57,9 @@ swaggerRouter.get("/debug", (req, res) => {
 swaggerRouter.use("/", swaggerUi.serve);
 swaggerRouter.get("/", (req, res, next) => {
   try {
-    // Try to find and load the YAML file
     const yamlPath = findSwaggerFile();
     const swaggerDocument = yaml.load(fs.readFileSync(yamlPath, "utf8"));
 
-    // Use CDN for Swagger UI assets to avoid 404 and MIME type issues
     const options = {
       explorer: true,
       customCssUrl: "https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui.css",
@@ -83,7 +79,6 @@ swaggerRouter.get("/", (req, res, next) => {
   } catch (error) {
     console.error("❌ Swagger setup error:", error.message);
 
-    // Send detailed error response
     const errorHtml = `
       <!DOCTYPE html>
       <html>
