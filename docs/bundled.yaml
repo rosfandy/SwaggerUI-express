@@ -4,7 +4,7 @@ info:
   description: Dokumentasi OpenAPI
   version: 1.0.0
 servers:
-  - url: 'http://localhost:3000/api'
+  - url: 'http://localhost:5123/api'
 paths:
   /hello:
     get:
@@ -89,3 +89,20 @@ paths:
                         type: string
                       email:
                         type: string
+  /projects:
+    get:
+      tags:
+        - projects
+    post:
+      tags:
+        - projects
+  '/projects/{id}':
+    get:
+      tags:
+        - projects
+    put:
+      tags:
+        - projects
+    delete:
+      tags:
+        - projects

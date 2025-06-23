@@ -4,7 +4,7 @@ info:
   description: Dokumentasi OpenAPI
   version: 1.0.0
 servers:
-  - url: http://localhost:3000/api
+  - url: http://localhost:5123/api
 paths:
   /hello:
     $ref: ./paths/hello/hello.get.yaml
@@ -13,3 +13,15 @@ paths:
       $ref: ./paths/users/users.get.yaml
     post:
       $ref: ./paths/users/users.post.yaml
+  /projects:
+    get:
+      $ref: ./paths/projects/projects.get.yaml
+    post:
+      $ref: ./paths/projects/projects.post.yaml
+  /projects/{id}:
+    get:
+      $ref: ./paths/projects/projects.getId.yaml
+    put:
+      $ref: ./paths/projects/projects.put.yaml
+    delete:
+      $ref: ./paths/projects/projects.delete.yaml

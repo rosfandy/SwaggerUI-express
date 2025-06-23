@@ -3,7 +3,7 @@ const swaggerRouter = require("./router");
 const app = express();
 
 app.use("/", swaggerRouter);
-app.get("/hello", (req, res) => {
+app.get("/api/hello", (req, res) => {
   res.json({ message: "Hello, World dari server!" });
 });
 
