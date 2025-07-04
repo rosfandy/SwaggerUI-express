@@ -1,0 +1,32 @@
+tags:
+  - Levels
+summary: Hapus level
+description: Menghapus data level berdasarkan ID
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: integer
+    description: ID level yang ingin dihapus
+responses:
+  "200":
+    description: Level berhasil dihapus
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Level berhasil dihapus
+  "404":
+    description: Level tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Level tidak ditemukan

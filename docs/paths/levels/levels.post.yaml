@@ -1,7 +1,7 @@
 tags:
-  - Users
-summary: Tambah pengguna
-description: Menambahkan pengguna baru
+  - Levels
+summary: Tambah level
+description: Menambahkan level baru
 requestBody:
   required: true
   content:
@@ -10,17 +10,13 @@ requestBody:
         type: object
         required:
           - name
-          - email
         properties:
           name:
             type: string
-            example: John Doe
-          email:
-            type: string
-            example: john@example.com
+            example: Level 1
 responses:
   "201":
-    description: Pengguna berhasil ditambahkan
+    description: Level berhasil ditambahkan
     content:
       application/json:
         schema:
@@ -28,13 +24,11 @@ responses:
           properties:
             message:
               type: string
-              example: Pengguna berhasil ditambahkan
+              example: Level berhasil ditambahkan
             user:
               type: object
               properties:
                 id:
                   type: integer
                 name:
-                  type: string
-                email:
                   type: string

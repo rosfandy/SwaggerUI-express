@@ -1,0 +1,51 @@
+tags:
+  - Levels
+summary: Ubah level
+description: Mengubah data level yang sudah ada berdasarkan ID
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: integer
+    description: ID level yang ingin diubah
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+        properties:
+          name:
+            type: string
+            example: Level 1
+responses:
+  "200":
+    description: Level berhasil diubah
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Level berhasil diubah
+            user:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+  "404":
+    description: Level tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Level tidak ditemukan

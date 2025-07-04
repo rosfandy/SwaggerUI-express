@@ -1,7 +1,7 @@
 tags:
-  - Users
-summary: Ambil semua pengguna
-description: Mengembalikan data semua pengguna
+  - Levels
+summary: Ambil semua level
+description: Mengembalikan data semua level
 responses:
   "200":
     description: Berhasil
@@ -18,6 +18,4 @@ responses:
                   id:
                     type: integer
                   name:
-                    type: string
-                  email:
                     type: string
