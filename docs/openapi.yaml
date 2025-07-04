@@ -13,3 +13,15 @@ paths:
       $ref: ./paths/users/users.get.yaml
     post:
       $ref: ./paths/users/users.post.yaml
+  /projects:
+    get:
+      $ref: ./paths/projects/projects.get.yaml
+    post:
+      $ref: ./paths/projects/projects.post.yaml
+  /projects/{id}:
+    get:
+      $ref: ./paths/projects/projects.getId.yaml
+    put:
+      $ref: ./paths/projects/projects.put.yaml
+    delete:
+      $ref: ./paths/projects/projects.delete.yaml

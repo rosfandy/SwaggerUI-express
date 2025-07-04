@@ -89,3 +89,20 @@ paths:
                         type: string
                       email:
                         type: string
+  /projects:
+    get:
+      tags:
+        - projects
+    post:
+      tags:
+        - projects
+  '/projects/{id}':
+    get:
+      tags:
+        - projects
+    put:
+      tags:
+        - projects
+    delete:
+      tags:
+        - projects
