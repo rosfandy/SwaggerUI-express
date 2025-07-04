@@ -4,7 +4,7 @@ info:
   description: Dokumentasi OpenAPI
   version: 1.0.0
 servers:
-  - url: 'http://localhost:5123/api'
+  - url: 'http://localhost:5000/api/v1'
 paths:
   /hello:
     get:
@@ -89,3 +89,185 @@ paths:
                         type: string
                       email:
                         type: string
+  /departments:
+    get:
+      tags:
+        - Departments
+      summary: Ambil semua departemen
+      description: Mengembalikan data semua departemen
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        created_at:
+                          type: string
+                          format: date-time
+                        updated_at:
+                          type: string
+                          format: date-time
+                  success:
+                    type: boolean
+    post:
+      tags:
+        - Departments
+      summary: Tambah departemen
+      description: Menambahkan departemen baru
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Departemen berhasil ditambahkan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                  success:
+                    type: boolean
+        '400':
+          description: Permintaan tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  success:
+                    type: boolean
+                    example: false
+  '/departments/{id}':
+    put:
+      tags:
+        - Departments
+      summary: Update departemen
+      description: Memperbarui informasi departemen berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID departemen
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Departemen berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                  success:
+                    type: boolean
+        '400':
+          description: Permintaan tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  success:
+                    type: boolean
+                    example: false
+    delete:
+      tags:
+        - Departments
+      summary: Hapus departemen
+      description: Menghapus departemen berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID departemen
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Departemen berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+                  message:
+                    type: string
+                    example: Department deleted successfully
+                  success:
+                    type: boolean
+        '400':
+          description: Permintaan tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  success:
+                    type: boolean
+                    example: false
