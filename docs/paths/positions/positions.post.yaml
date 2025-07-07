@@ -1,0 +1,66 @@
+tags:
+  - Positions
+summary: Buat posisi baru
+description: Membuat posisi baru dan mengembalikan data posisi yang telah dibuat
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+          - department_id
+        properties:
+          name:
+            type: string
+            example: "Frontend Developer"
+            description: Nama posisi
+          department_id:
+            type: integer
+            example: 1
+            description: ID departemen
+responses:
+  "201":
+    description: Posisi berhasil dibuat
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 3
+                name:
+                  type: string
+                  example: "Frontend Developer"
+                department_id:
+                  type: integer
+                  example: 1
+                created_at:
+                  type: string
+                  format: date-time
+                  example: "2025-07-04T14:04:06.937432+07:00"
+                updated_at:
+                  type: string
+                  format: date-time
+                  example: "2025-07-04T14:04:06.937432+07:00"
+            success:
+              type: boolean
+              example: true
+  "400":
+    description: Data tidak valid
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: false
+            message:
+              type: string
+              example: "Data tidak valid"

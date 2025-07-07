@@ -1,7 +1,7 @@
 tags:
-  - Users
-summary: Ambil semua pengguna
-description: Mengembalikan data semua pengguna
+  - Titles
+summary: Ambil semua title
+description: Mengembalikan data semua title
 responses:
   "200":
     description: Berhasil
@@ -10,14 +10,12 @@ responses:
         schema:
           type: object
           properties:
-            users:
+            titles:
               type: array
               items:
                 type: object
                 properties:
                   id:
                     type: integer
-                  name:
-                    type: string
-                  email:
+                  title:
                     type: string
