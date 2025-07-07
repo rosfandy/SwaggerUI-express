@@ -1,0 +1,39 @@
+tags:
+  - Levels
+summary: Ambil semua level
+description: Mengembalikan data semua level
+responses:
+  "200":
+    description: Berhasil
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Level'
+            success:
+              type: boolean
+              example: true
+
+components:
+  schemas:
+    Level:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: Level 1 updated
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T14:15:36.829823+07:00"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T14:30:14.4948+07:00"
