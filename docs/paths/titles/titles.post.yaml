@@ -1,0 +1,66 @@
+# titles.post.yaml
+  tags:
+    - titles
+  summary: Buat title baru
+  description: Membuat title baru dengan data yang diberikan
+  requestBody:
+    description: Data title baru
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Nama title
+            position_id:
+              type: integer
+              description: ID posisi
+            department_id:
+              type: integer
+              description: ID departemen
+            level_id:
+              type: integer
+              description: ID level
+          required:
+            - name
+            - position_id
+            - department_id
+            - level_id
+  responses:
+    '201':
+      description: Berhasil membuat title baru
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID title
+                  name:
+                    type: string
+                    description: Nama title
+                  department_id:
+                    type: integer
+                    description: ID departemen
+                  position_id:
+                    type: integer
+                    description: ID posisi
+                  level_id:
+                    type: integer
+                    description: ID level
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Waktu pembuatan
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Waktu pembaruan
+              success:
+                type: boolean
+                description: Status keberhasilan
