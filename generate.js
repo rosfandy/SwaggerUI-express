@@ -70,7 +70,7 @@ program
     });
 
     fs.writeFileSync(openapiPath, yaml.dump(doc, { lineWidth: -1 }));
-    console.log("✅ openapi.yaml updated.");
+    console.log("✅ openapi.yaml updated");
   });
 
 program.parse();
