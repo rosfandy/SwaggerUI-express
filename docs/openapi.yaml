@@ -4,12 +4,18 @@ info:
   description: Dokumentasi OpenAPI
   version: 1.0.0
 servers:
+  - url: http://localhost:5000/api/v1
   - url: http://localhost:5123/api
 paths:
   /hello:
     $ref: ./paths/hello/hello.get.yaml
-  /users:
+  /levels:
     get:
-      $ref: ./paths/users/users.get.yaml
+      $ref: ./paths/levels/levels.get.yaml
     post:
-      $ref: ./paths/users/users.post.yaml
+      $ref: ./paths/levels/levels.post.yaml
+  /levels/{id}:
+    put:
+      $ref: ./paths/levels/levels.put.yaml
+    delete:
+      $ref: ./paths/levels/levels.delete.yaml
