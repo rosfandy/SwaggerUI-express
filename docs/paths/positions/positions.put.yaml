@@ -1,0 +1,84 @@
+tags:
+  - Positions
+summary: Update posisi
+description: Mengupdate posisi yang sudah ada dan mengembalikan data posisi yang telah diupdate
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: integer
+    description: ID posisi yang akan diupdate
+    example: 3
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            example: "Frontend Developesr"
+            description: Nama posisi baru
+          department_id:
+            type: integer
+            example: 1
+            description: ID departemen baru
+responses:
+  "200":
+    description: Posisi berhasil diupdate
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 3
+                name:
+                  type: string
+                  example: "Frontend Developesr"
+                department_id:
+                  type: integer
+                  example: 1
+                created_at:
+                  type: string
+                  format: date-time
+                  example: "2025-07-04T14:04:06.937432+07:00"
+                updated_at:
+                  type: string
+                  format: date-time
+                  example: "2025-07-04T14:05:04.99301+07:00"
+            success:
+              type: boolean
+              example: true
+  "404":
+    description: Posisi tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: false
+            message:
+              type: string
+              example: "Posisi tidak ditemukan"
+  "400":
+    description: Data tidak valid
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: false
+            message:
+              type: string
+              example: "Data tidak valid"

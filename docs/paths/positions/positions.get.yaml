@@ -1,0 +1,54 @@
+tags:
+  - Positions
+summary: Ambil semua posisi
+description: Mengembalikan data semua posisi beserta informasi departemen
+responses:
+  "200":
+    description: Berhasil
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "Backend Developer"
+                  department_id:
+                    type: integer
+                    example: 2
+                  created_at:
+                    type: string
+                    format: date-time
+                    example: "2025-07-04T13:51:51.901876+07:00"
+                  updated_at:
+                    type: string
+                    format: date-time
+                    example: "2025-07-04T13:53:29.343153+07:00"
+                  has_department:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      name:
+                        type: string
+                        example: "HR"
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2025-07-04T13:52:49.041189+07:00"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2025-07-04T13:52:49.041769+07:00"
+            success:
+              type: boolean
+              example: true
