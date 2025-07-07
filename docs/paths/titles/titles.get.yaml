@@ -1,0 +1,21 @@
+tags:
+  - titles
+summary: Ambil semua title
+description: Mengembalikan data semua title
+responses:
+  '200':
+    description: Berhasil
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            titles:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
