@@ -5,10 +5,6 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:5000/api/v1
-<<<<<<< HEAD
-  - url: http://localhost:5123/api
-=======
->>>>>>> a73efe79ffd7b9cb125d566263f7c249b5402b50
 paths:
   /hello:
     $ref: ./paths/hello/hello.get.yaml
@@ -16,14 +12,6 @@ paths:
     get:
       $ref: ./paths/levels/levels.get.yaml
     post:
-<<<<<<< HEAD
-      $ref: ./paths/levels/levels.post.yaml
-  /levels/{id}:
-    put:
-      $ref: ./paths/levels/levels.put.yaml
-    delete:
-      $ref: ./paths/levels/levels.delete.yaml
-=======
       $ref: ./paths/users/users.post.yaml
   /titles:
     get:
@@ -37,4 +25,3 @@ paths:
       $ref: ./paths/titles/titles.put.yaml
     delete:
       $ref: ./paths/titles/titles.delete.yaml
->>>>>>> a73efe79ffd7b9cb125d566263f7c249b5402b50
