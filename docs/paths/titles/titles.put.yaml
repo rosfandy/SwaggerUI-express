@@ -1,5 +1,5 @@
 tags:
-  - titles
+  - Titles
 summary: Perbarui title
 description: Memperbarui title berdasarkan ID
 parameters:
@@ -29,7 +29,7 @@ requestBody:
             type: integer
             description: ID level
 responses:
-  '200':
+  "200":
     description: Berhasil memperbarui title
     content:
       application/json:
@@ -61,7 +61,7 @@ responses:
             success:
               type: boolean
               description: Status keberhasilan
-  '404':
+  "404":
     description: Title tidak ditemukan
     content:
       application/json:

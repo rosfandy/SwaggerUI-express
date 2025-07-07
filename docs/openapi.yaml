@@ -12,7 +12,7 @@ paths:
     get:
       $ref: ./paths/levels/levels.get.yaml
     post:
-      $ref: ./paths/users/users.post.yaml
+      $ref: ./paths/levels/levels.post.yaml
   /titles:
     get:
       $ref: ./paths/titles/titles.get.yaml
