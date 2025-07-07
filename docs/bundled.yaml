@@ -4,7 +4,7 @@ info:
   description: Dokumentasi OpenAPI
   version: 1.0.0
 servers:
-  - url: 'http://localhost:5123/api'
+  - url: 'http://localhost:5000/api/v1'
 paths:
   /hello:
     get:
@@ -89,3 +89,190 @@ paths:
                         type: string
                       email:
                         type: string
+  /titles:
+    get:
+      tags:
+        - titles
+      summary: Ambil semua title
+      description: Mengembalikan data semua title
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  titles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        title:
+                          type: string
+    post:
+      tags:
+        - titles
+      summary: Buat title baru
+      description: Membuat title baru dengan data yang diberikan
+      requestBody:
+        description: Data title baru
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nama title
+                position_id:
+                  type: integer
+                  description: ID posisi
+                department_id:
+                  type: integer
+                  description: ID departemen
+                level_id:
+                  type: integer
+                  description: ID level
+              required:
+                - name
+                - position_id
+                - department_id
+                - level_id
+      responses:
+        '201':
+          description: Berhasil membuat title baru
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID title
+                      name:
+                        type: string
+                        description: Nama title
+                      department_id:
+                        type: integer
+                        description: ID departemen
+                      position_id:
+                        type: integer
+                        description: ID posisi
+                      level_id:
+                        type: integer
+                        description: ID level
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Waktu pembuatan
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Waktu pembaruan
+                  success:
+                    type: boolean
+                    description: Status keberhasilan
+  '/titles/{id}':
+    get:
+      tags:
+        - titles
+    put:
+      tags:
+        - titles
+      summary: Perbarui title
+      description: Memperbarui title berdasarkan ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID title
+      requestBody:
+        description: Data title yang diperbarui
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nama title
+                position_id:
+                  type: integer
+                  description: ID posisi
+                department_id:
+                  type: integer
+                  description: ID departemen
+                level_id:
+                  type: integer
+                  description: ID level
+      responses:
+        '200':
+          description: Berhasil memperbarui title
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID title
+                      name:
+                        type: string
+                        description: Nama title
+                      department_id:
+                        type: integer
+                        description: ID departemen
+                      position_id:
+                        type: integer
+                        description: ID posisi
+                      level_id:
+                        type: integer
+                        description: ID level
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Waktu pembaruan
+                  success:
+                    type: boolean
+                    description: Status keberhasilan
+        '404':
+          description: Title tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Status keberhasilan
+                  message:
+                    type: string
+                    description: Pesan kesalahan
+    delete:
+      tags:
+        - titles
+      summary: Hapus title
+      description: Menghapus title berdasarkan ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID title
+      responses:
+        '204':
+          description: Berhasil menghapus title
+        '404':
+          description: Title tidak ditemukan

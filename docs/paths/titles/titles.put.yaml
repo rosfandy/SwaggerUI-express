@@ -1,0 +1,76 @@
+tags:
+  - titles
+summary: Perbarui title
+description: Memperbarui title berdasarkan ID
+parameters:
+  - in: path
+    name: id
+    schema:
+      type: integer
+    required: true
+    description: ID title
+requestBody:
+  description: Data title yang diperbarui
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Nama title
+          position_id:
+            type: integer
+            description: ID posisi
+          department_id:
+            type: integer
+            description: ID departemen
+          level_id:
+            type: integer
+            description: ID level
+responses:
+  '200':
+    description: Berhasil memperbarui title
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: ID title
+                name:
+                  type: string
+                  description: Nama title
+                department_id:
+                  type: integer
+                  description: ID departemen
+                position_id:
+                  type: integer
+                  description: ID posisi
+                level_id:
+                  type: integer
+                  description: ID level
+                updated_at:
+                  type: string
+                  format: date-time
+                  description: Waktu pembaruan
+            success:
+              type: boolean
+              description: Status keberhasilan
+  '404':
+    description: Title tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              description: Status keberhasilan
+            message:
+              type: string
+              description: Pesan kesalahan
