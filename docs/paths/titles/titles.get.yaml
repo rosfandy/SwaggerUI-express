@@ -1,9 +1,9 @@
 tags:
-  - titles
+  - Titles
 summary: Ambil semua title
 description: Mengembalikan data semua title
 responses:
-  '200':
+  "200":
     description: Berhasil
     content:
       application/json:
