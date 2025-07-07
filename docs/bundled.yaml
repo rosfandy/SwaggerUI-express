@@ -4,6 +4,7 @@ info:
   description: Dokumentasi OpenAPI
   version: 1.0.0
 servers:
+  - url: 'http://localhost:5000/api/v1'
   - url: 'http://localhost:5123/api'
 paths:
   /hello:
@@ -27,8 +28,8 @@ paths:
     get:
       tags:
         - Users
-      summary: Ambil semua pengguna
-      description: Mengembalikan data semua pengguna
+      summary: Ambil semua user
+      description: Mengembalikan data semua user
       responses:
         '200':
           description: Berhasil
@@ -37,17 +38,34 @@ paths:
               schema:
                 type: object
                 properties:
-                  users:
+                  data:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        name:
-                          type: string
-                        email:
-                          type: string
+                      $ref: '#/paths/~1users/get/components/schemas/User'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          User:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 2
+              title_id:
+                type: integer
+                example: 0
+              name:
+                type: string
+                example: Halo
+              email:
+                type: string
+                format: email
+                example: halo@gmail.com
+              password:
+                type: string
+                example: haloabcde
     post:
       tags:
         - Users
@@ -62,13 +80,17 @@ paths:
               required:
                 - name
                 - email
+                - password
               properties:
                 name:
                   type: string
-                  example: John Doe
+                  example: name6
                 email:
                   type: string
-                  example: john@example.com
+                  example: name6@gmail.com
+                password:
+                  type: string
+                  example: name6abcde
       responses:
         '201':
           description: Pengguna berhasil ditambahkan
@@ -77,15 +99,165 @@ paths:
               schema:
                 type: object
                 properties:
+                  data:
+                    $ref: '#/paths/~1users/post/components/schemas/User'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          User:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+              title_id:
+                type: integer
+                example: 0
+              name:
+                type: string
+                example: name6
+              email:
+                type: string
+                format: email
+                example: name6@gmail.com
+              password:
+                type: string
+                example: name6abcde
+              created_at:
+                type: string
+                format: date-time
+                example: '2023-10-01T12:00:00Z'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2023-10-01T12:00:00Z'
+  '/users/{id}':
+    put:
+      '404':
+        description: Pengguna tidak ditemukan
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Pengguna tidak ditemukan
+                success:
+                  type: boolean
+                  example: false
+      tags:
+        - Users
+      summary: Ubah pengguna
+      description: Mengubah data pengguna yang sudah ada
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID penggguna yang akan diubah
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              requuired:
+                - name
+                - email
+                - password
+              properties:
+                name:
+                  type: string
+                  example: halohai
+                email:
+                  type: string
+                  format: email
+                  example: halohai@gmail.com
+                password:
+                  type: string
+                  example: halohaiabcde
+      responses:
+        '200':
+          description: Pengguna berhasil diubah
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1users~1%7Bid%7D/put/components/schemas/User'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          User:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+              title_id:
+                type: integer
+                example: 0
+              name:
+                type: string
+                example: halohai
+              email:
+                type: string
+                format: email
+                example: halohai@gmail.com
+              password:
+                type: string
+                example: halohaiabcde
+              created_at:
+                type: string
+                format: date-time
+                example: '2023-10-01T12:00:00Z'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2023-10-01T12:00:00Z'
+    delete:
+      tags:
+        - Users
+      summary: Hapus pengguna
+      description: Menghapus pengguna berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID pengguna yang akan dihapus
+      responses:
+        '200':
+          description: Pengguna berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
                   message:
                     type: string
-                    example: Pengguna berhasil ditambahkan
-                  user:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      name:
-                        type: string
-                      email:
-                        type: string
+                    example: Pengguna berhasil dihapus
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          description: Pengguna tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Pengguna tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false

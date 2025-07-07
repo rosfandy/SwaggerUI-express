@@ -11,13 +11,17 @@ requestBody:
         required:
           - name
           - email
+          - password
         properties:
           name:
             type: string
-            example: John Doe
+            example: nmae6
           email:
             type: string
-            example: john@example.com
+            example: name6@gmail.com
+          password:
+            type: string
+            example: name6abcde
 responses:
   "201":
     description: Pengguna berhasil ditambahkan
@@ -26,15 +30,38 @@ responses:
         schema:
           type: object
           properties:
-            message:
-              type: string
-              example: Pengguna berhasil ditambahkan
-            user:
-              type: object
-              properties:
-                id:
-                  type: integer
-                name:
-                  type: string
-                email:
-                  type: string
+            data:
+              $ref: '#/components/schemas/User'
+            success:
+              type: boolean
+              example: true
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+        title_id:
+          type: integer
+          example: 0
+        name:
+          type: string
+          example: name6
+        email:
+          type: string
+          format: email
+          example: name6@gmail.com
+        password:
+          type: string  
+          example: name6abcde
+        created_at:
+          type: string
+          format: date-time
+          example: '2023-10-01T12:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2023-10-01T12:00:00Z'
