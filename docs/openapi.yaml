@@ -4,6 +4,7 @@ info:
   description: Dokumentasi OpenAPI
   version: 1.0.0
 servers:
+  - url: http://localhost:5000/api/v1
   - url: http://localhost:5123/api
 paths:
   /hello:

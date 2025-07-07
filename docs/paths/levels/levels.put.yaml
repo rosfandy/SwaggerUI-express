@@ -20,7 +20,7 @@ requestBody:
         properties:
           name:
             type: string
-            example: Level 1
+            example: Level 4
 responses:
   "200":
     description: Level berhasil diubah
@@ -29,16 +29,11 @@ responses:
         schema:
           type: object
           properties:
-            message:
-              type: string
-              example: Level berhasil diubah
-            user:
-              type: object
-              properties:
-                id:
-                  type: integer
-                name:
-                  type: string
+            data:
+              $ref: '#/components/schemas/Level'
+            success:
+              type: boolean
+              example: true
   "404":
     description: Level tidak ditemukan
     content:
@@ -46,6 +41,29 @@ responses:
         schema:
           type: object
           properties:
-            message:
+            error:
               type: string
-              example: Level tidak ditemukan
+              example: Data tidak ditemukan
+            success:
+              type: boolean
+              example: false
+
+components:
+  schemas:
+    Level:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 7
+        name:
+          type: string
+          example: Level 4
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:22:09.576943+07:00"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:35:54.402047+07:00"

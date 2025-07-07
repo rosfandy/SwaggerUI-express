@@ -13,7 +13,7 @@ requestBody:
         properties:
           name:
             type: string
-            example: Level 1
+            example: Level 3
 responses:
   "201":
     description: Level berhasil ditambahkan
@@ -22,13 +22,28 @@ responses:
         schema:
           type: object
           properties:
-            message:
-              type: string
-              example: Level berhasil ditambahkan
-            user:
-              type: object
-              properties:
-                id:
-                  type: integer
-                name:
-                  type: string
+            data:
+              $ref: '#/components/schemas/Level'
+            success:
+              type: boolean
+              example: true
+
+components:
+  schemas:
+    Level:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 6
+        name:
+          type: string
+          example: Level 3
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:20:27.879181+07:00"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:20:27.879181+07:00"

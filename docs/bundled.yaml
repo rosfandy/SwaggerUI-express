@@ -4,6 +4,7 @@ info:
   description: Dokumentasi OpenAPI
   version: 1.0.0
 servers:
+  - url: 'http://localhost:5000/api/v1'
   - url: 'http://localhost:5123/api'
 paths:
   /hello:
@@ -37,15 +38,32 @@ paths:
               schema:
                 type: object
                 properties:
-                  users:
+                  data:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        name:
-                          type: string
+                      $ref: '#/paths/~1levels/get/components/schemas/Level'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          Level:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 2
+              name:
+                type: string
+                example: Level 1 updated
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T14:15:36.829823+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T14:30:14.4948+07:00'
     post:
       tags:
         - Levels
@@ -62,7 +80,7 @@ paths:
               properties:
                 name:
                   type: string
-                  example: Level 1
+                  example: Level 3
       responses:
         '201':
           description: Level berhasil ditambahkan
@@ -71,16 +89,30 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                    example: Level berhasil ditambahkan
-                  user:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      name:
-                        type: string
+                  data:
+                    $ref: '#/paths/~1levels/post/components/schemas/Level'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          Level:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 6
+              name:
+                type: string
+                example: Level 3
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:20:27.879181+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:20:27.879181+07:00'
   '/levels/{id}':
     put:
       tags:
@@ -105,7 +137,7 @@ paths:
               properties:
                 name:
                   type: string
-                  example: Level 1
+                  example: Level 4
       responses:
         '200':
           description: Level berhasil diubah
@@ -114,16 +146,11 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                    example: Level berhasil diubah
-                  user:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      name:
-                        type: string
+                  data:
+                    $ref: '#/paths/~1levels~1%7Bid%7D/put/components/schemas/Level'
+                  success:
+                    type: boolean
+                    example: true
         '404':
           description: Level tidak ditemukan
           content:
@@ -131,9 +158,31 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  error:
                     type: string
-                    example: Level tidak ditemukan
+                    example: Data tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false
+      components:
+        schemas:
+          Level:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 7
+              name:
+                type: string
+                example: Level 4
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:22:09.576943+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:35:54.402047+07:00'
     delete:
       tags:
         - Levels
@@ -154,9 +203,16 @@ paths:
               schema:
                 type: object
                 properties:
+                  data:
+                    nullable: true
+                    type: object
+                    example: null
                   message:
                     type: string
                     example: Level berhasil dihapus
+                  success:
+                    type: boolean
+                    example: true
         '404':
           description: Level tidak ditemukan
           content:
@@ -164,6 +220,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  error:
                     type: string
-                    example: Level tidak ditemukan
+                    example: Data tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false

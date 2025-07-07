@@ -17,9 +17,16 @@ responses:
         schema:
           type: object
           properties:
+            data:
+              nullable: true
+              type: object
+              example: null
             message:
               type: string
               example: Level berhasil dihapus
+            success:
+              type: boolean
+              example: true
   "404":
     description: Level tidak ditemukan
     content:
@@ -27,6 +34,9 @@ responses:
         schema:
           type: object
           properties:
-            message:
+            error:
               type: string
-              example: Level tidak ditemukan
+              example: Data tidak ditemukan
+            success:
+              type: boolean
+              example: false
