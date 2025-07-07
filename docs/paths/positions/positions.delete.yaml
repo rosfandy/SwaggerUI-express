@@ -1,0 +1,61 @@
+tags:
+  - Positions
+summary: Hapus posisi
+description: Menghapus posisi berdasarkan ID yang diberikan
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: integer
+    description: ID posisi yang akan dihapus
+    example: 3
+responses:
+  "200":
+    description: Posisi berhasil dihapus
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: "null"
+              example: null
+            message:
+              type: string
+              example: "Position deleted successfully"
+            success:
+              type: boolean
+              example: true
+  "404":
+    description: Posisi tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: "null"
+              example: null
+            message:
+              type: string
+              example: "Position not found"
+            success:
+              type: boolean
+              example: false
+  "400":
+    description: ID tidak valid
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: "null"
+              example: null
+            message:
+              type: string
+              example: "Invalid ID"
+            success:
+              type: boolean
+              example: false
