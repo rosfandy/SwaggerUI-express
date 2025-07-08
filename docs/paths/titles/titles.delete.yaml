@@ -1,0 +1,17 @@
+# titles.delete.yaml
+tags:
+  - Titles
+summary: Hapus title
+description: Menghapus title berdasarkan ID
+parameters:
+  - in: path
+    name: id
+    schema:
+      type: integer
+    required: true
+    description: ID title
+responses:
+  "204":
+    description: Berhasil menghapus title
+  "404":
+    description: Title tidak ditemukan

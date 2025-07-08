@@ -13,8 +13,7 @@ components:
       scheme: bearer
       bearerFormat: JWT
 servers:
-  - url: http://localhost:5000/api/v1
-  - url: http://localhost:5123/api
+  - url: http://127.0.0.1:5000/api/v1
 paths:
   /hello:
     $ref: ./paths/hello/hello.get.yaml
@@ -23,11 +22,28 @@ paths:
       $ref: ./paths/levels/levels.get.yaml
     post:
       $ref: ./paths/levels/levels.post.yaml
-  /levels/{id}:
+  /titles:
+    get:
+      $ref: ./paths/titles/titles.get.yaml
+    post:
+      $ref: ./paths/titles/titles.post.yaml
+  /titles/{id}:
+    get:
+      $ref: ./paths/titles/titles.getId.yaml
     put:
-      $ref: ./paths/levels/levels.put.yaml
+      $ref: ./paths/titles/titles.put.yaml
     delete:
-      $ref: ./paths/levels/levels.delete.yaml
+      $ref: ./paths/titles/titles.delete.yaml
+  /positions:
+    get:
+      $ref: ./paths/positions/positions.get.yaml
+    post:
+      $ref: ./paths/positions/positions.post.yaml
+  /positions/{id}:
+    put:
+      $ref: ./paths/positions/positions.put.yaml
+    delete:
+      $ref: ./paths/positions/positions.delete.yaml
   /auth/login:
     post:
       $ref: ./paths/auth/login.post.yaml
