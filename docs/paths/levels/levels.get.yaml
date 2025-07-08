@@ -2,6 +2,8 @@ tags:
   - Levels
 summary: Ambil semua level
 description: Mengembalikan data semua level
+security:
+  - BearerAuth: []
 responses:
   "200":
     description: Berhasil

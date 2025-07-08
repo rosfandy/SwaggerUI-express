@@ -2,6 +2,8 @@ tags:
   - Levels
 summary: Tambah level
 description: Menambahkan level baru
+security:
+  - BearerAuth: []
 requestBody:
   required: true
   content:

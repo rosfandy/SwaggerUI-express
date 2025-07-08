@@ -2,6 +2,8 @@ tags:
   - Levels
 summary: Hapus level
 description: Menghapus data level berdasarkan ID
+security:
+  - BearerAuth: []
 parameters:
   - name: id
     in: path
