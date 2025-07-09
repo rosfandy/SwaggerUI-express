@@ -3,8 +3,17 @@ info:
   title: OpenAPI
   description: Dokumentasi OpenAPI
   version: 1.0.0
+  security:
+    - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 servers:
   - url: 'http://127.0.0.1:5000/api/v1'
+  - url: 'https://jk-go-52014148654.asia-southeast2.run.app/api/v1'
 paths:
   /hello:
     get:
@@ -29,6 +38,8 @@ paths:
         - Levels
       summary: Ambil semua level
       description: Mengembalikan data semua level
+      security:
+        - BearerAuth: []
       responses:
         '200':
           description: Berhasil
@@ -68,6 +79,8 @@ paths:
         - Levels
       summary: Tambah level
       description: Menambahkan level baru
+      security:
+        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -118,6 +131,8 @@ paths:
         - Levels
       summary: Ubah level
       description: Mengubah data level yang sudah ada berdasarkan ID
+      security:
+        - BearerAuth: []
       parameters:
         - name: id
           in: path
@@ -182,11 +197,15 @@ paths:
                 type: string
                 format: date-time
                 example: '2025-07-04T16:35:54.402047+07:00'
-    delete:
+    get:
+      $ref: '#/paths/~1levels~1%7Bid%7D/put'
+    post:
       tags:
         - Levels
       summary: Hapus level
       description: Menghapus data level berdasarkan ID
+      security:
+        - BearerAuth: []
       parameters:
         - name: id
           in: path
@@ -222,243 +241,6 @@ paths:
                   error:
                     type: string
                     example: Data tidak ditemukan
-                  success:
-                    type: boolean
-                    example: false
-  /users:
-    get:
-      tags:
-        - Users
-      summary: Ambil semua user
-      description: Mengembalikan data semua user
-      responses:
-        '200':
-          description: Berhasil
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/paths/~1users/get/components/schemas/User'
-                  success:
-                    type: boolean
-                    example: true
-      components:
-        schemas:
-          User:
-            type: object
-            properties:
-              id:
-                type: integer
-                example: 2
-              title_id:
-                type: integer
-                example: 0
-              name:
-                type: string
-                example: Halo
-              email:
-                type: string
-                format: email
-                example: halo@gmail.com
-              password:
-                type: string
-                example: haloabcde
-    post:
-      tags:
-        - Users
-      summary: Tambah pengguna
-      description: Menambahkan pengguna baru
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - name
-                - email
-                - password
-              properties:
-                name:
-                  type: string
-                  example: nmae6
-                email:
-                  type: string
-                  example: name6@gmail.com
-                password:
-                  type: string
-                  example: name6abcde
-      responses:
-        '201':
-          description: Pengguna berhasil ditambahkan
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    $ref: '#/paths/~1users/post/components/schemas/User'
-                  success:
-                    type: boolean
-                    example: true
-      components:
-        schemas:
-          User:
-            type: object
-            properties:
-              id:
-                type: integer
-                example: 4
-              title_id:
-                type: integer
-                example: 0
-              name:
-                type: string
-                example: name6
-              email:
-                type: string
-                format: email
-                example: name6@gmail.com
-              password:
-                type: string
-                example: name6abcde
-              created_at:
-                type: string
-                format: date-time
-                example: '2023-10-01T12:00:00Z'
-              updated_at:
-                type: string
-                format: date-time
-                example: '2023-10-01T12:00:00Z'
-  '/users/{id}':
-    put:
-      '404':
-        description: Pengguna tidak ditemukan
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-                  example: Pengguna tidak ditemukan
-                success:
-                  type: boolean
-                  example: false
-      tags:
-        - Users
-      summary: Ubah pengguna
-      description: Mengubah data pengguna yang sudah ada
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: ID penggguna yang akan diubah
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              requuired:
-                - name
-                - email
-                - password
-              properties:
-                name:
-                  type: string
-                  example: halohai
-                email:
-                  type: string
-                  format: email
-                  example: halohai@gmail.com
-                password:
-                  type: string
-                  example: halohaiabcde
-      responses:
-        '200':
-          description: Pengguna berhasil diubah
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    $ref: '#/paths/~1users~1%7Bid%7D/put/components/schemas/User'
-                  success:
-                    type: boolean
-                    example: true
-      components:
-        schemas:
-          User:
-            type: object
-            properties:
-              id:
-                type: integer
-                example: 6
-              title_id:
-                type: integer
-                example: 0
-              name:
-                type: string
-                example: halohai
-              email:
-                type: string
-                format: email
-                example: halohai@gmail.com
-              password:
-                type: string
-                example: halohaiabcde
-              created_at:
-                type: string
-                format: date-time
-                example: '2023-10-01T12:00:00Z'
-              updated_at:
-                type: string
-                format: date-time
-                example: '2023-10-01T12:00:00Z'
-    delete:
-      tags:
-        - Users
-      summary: Hapus pengguna
-      description: Menghapus pengguna berdasarkan ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: ID pengguna yang akan dihapus
-      responses:
-        '200':
-          description: Pengguna berhasil dihapus
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Pengguna berhasil dihapus
-                  success:
-                    type: boolean
-                    example: true
-        '404':
-          description: Pengguna tidak ditemukan
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Pengguna tidak ditemukan
                   success:
                     type: boolean
                     example: false
@@ -552,9 +334,6 @@ paths:
                     type: boolean
                     description: Status keberhasilan
   '/titles/{id}':
-    get:
-      tags:
-        - Titles
     put:
       tags:
         - Titles
@@ -920,12 +699,12 @@ paths:
                   success:
                     type: boolean
                     example: false
-  /leaves:
+  /users:
     get:
       tags:
-        - Leaves
-      summary: Ambil semua data cuti
-      description: Mengembalikan data semua cuti yang ada
+        - Users
+      summary: Ambil semua user
+      description: Mengembalikan data semua user
       responses:
         '200':
           description: Berhasil
@@ -937,41 +716,36 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/paths/~1leaves/get/components/schemas/Leave'
+                      $ref: '#/paths/~1users/get/components/schemas/User'
                   success:
                     type: boolean
                     example: true
       components:
         schemas:
-          Leave:
+          User:
             type: object
             properties:
               id:
                 type: integer
-                example: 1
-              user_id:
+                example: 2
+              title_id:
                 type: integer
-                example: 17
-              date:
+                example: 0
+              name:
                 type: string
-                format: date
-                example: 04-07-2025
-              description:
+                example: Halo
+              email:
                 type: string
-                example: Cuti tahunan
-              created_at:
+                format: email
+                example: halo@gmail.com
+              password:
                 type: string
-                format: date-time
-                example: '2025-07-04T16:22:09.576943+07:00'
-              updated_at:
-                type: string
-                format: date-time
-                example: '2025-07-04T16:22:09.576943+07:00'
+                example: haloabcde
     post:
       tags:
-        - Leaves
-      summary: Tambah data cuti
-      description: Menambahkan data cuti baru
+        - Users
+      summary: Tambah pengguna
+      description: Menambahkan pengguna baru
       requestBody:
         required: true
         content:
@@ -979,72 +753,291 @@ paths:
             schema:
               type: object
               required:
-                - user_id
-                - date
-                - description
+                - name
+                - email
+                - password
               properties:
-                user_id:
-                  type: integer
-                  example: 17
-                date:
+                name:
                   type: string
-                  format: date
-                  example: 30-12-2025
-                description:
+                  example: nmae6
+                email:
                   type: string
-                  example: Cuti tahun baru
+                  example: name6@gmail.com
+                password:
+                  type: string
+                  example: name6abcde
       responses:
         '201':
-          description: Cuti berhasil ditambahkan
+          description: Pengguna berhasil ditambahkan
           content:
             application/json:
               schema:
                 type: object
                 properties:
                   data:
-                    $ref: '#/paths/~1leaves/post/components/schemas/Leave'
+                    $ref: '#/paths/~1users/post/components/schemas/User'
                   success:
                     type: boolean
                     example: true
       components:
         schemas:
-          Leave:
+          User:
             type: object
             properties:
               id:
                 type: integer
-                example: 1
-              user_id:
+                example: 4
+              title_id:
                 type: integer
-                example: 17
-              date:
+                example: 0
+              name:
                 type: string
-                format: date
-                example: 30-12-2025
-              description:
+                example: name6
+              email:
                 type: string
-                example: Cuti tahun baru
+                format: email
+                example: name6@gmail.com
+              password:
+                type: string
+                example: name6abcde
               created_at:
                 type: string
                 format: date-time
-                example: '2025-07-04T16:22:09.576943+07:00'
+                example: '2023-10-01T12:00:00Z'
               updated_at:
                 type: string
                 format: date-time
-                example: '2025-07-04T16:22:09.576943+07:00'
-  '/leaves/{id}':
+                example: '2023-10-01T12:00:00Z'
+  '/users/{id}':
     put:
+      '404':
+        description: Pengguna tidak ditemukan
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Pengguna tidak ditemukan
+                success:
+                  type: boolean
+                  example: false
       tags:
-        - Leaves
-      summary: Ubah data cuti
-      description: Mengubah data cuti berdasarkan ID
+        - Users
+      summary: Ubah pengguna
+      description: Mengubah data pengguna yang sudah ada
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-          description: ID cuti yang ingin diubah
+          description: ID penggguna yang akan diubah
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              requuired:
+                - name
+                - email
+                - password
+              properties:
+                name:
+                  type: string
+                  example: halohai
+                email:
+                  type: string
+                  format: email
+                  example: halohai@gmail.com
+                password:
+                  type: string
+                  example: halohaiabcde
+      responses:
+        '200':
+          description: Pengguna berhasil diubah
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1users~1%7Bid%7D/put/components/schemas/User'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          User:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 6
+              title_id:
+                type: integer
+                example: 0
+              name:
+                type: string
+                example: halohai
+              email:
+                type: string
+                format: email
+                example: halohai@gmail.com
+              password:
+                type: string
+                example: halohaiabcde
+              created_at:
+                type: string
+                format: date-time
+                example: '2023-10-01T12:00:00Z'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2023-10-01T12:00:00Z'
+    delete:
+      tags:
+        - Users
+      summary: Hapus pengguna
+      description: Menghapus pengguna berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID pengguna yang akan dihapus
+      responses:
+        '200':
+          description: Pengguna berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Pengguna berhasil dihapus
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          description: Pengguna tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Pengguna tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false
+  /projects:
+    get:
+      tags:
+        - Projects
+      summary: Ambil semua proyek
+      description: Mengembalikan data semua proyek
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        code:
+                          type: string
+                        start_date:
+                          type: string
+                          format: date-time
+                        end_date:
+                          type: string
+                          format: date-time
+                        created_at:
+                          type: string
+                          format: date-time
+                        updated_at:
+                          type: string
+                          format: date-time
+                        team:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              project_id:
+                                type: integer
+                              name:
+                                type: string
+                              code:
+                                type: string
+                              created_at:
+                                type: string
+                                format: date-time
+                              updated_at:
+                                type: string
+                                format: date-time
+                              SquadMembers:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                    title_id:
+                                      type: integer
+                                    name:
+                                      type: string
+                                    email:
+                                      type: string
+                                    email_verified_at:
+                                      type: string
+                                      format: date-time
+                                    password:
+                                      type: string
+                                    remember_token:
+                                      type: string
+                                      nullable: true
+                                    custom_fields:
+                                      type: string
+                                    avatar_url:
+                                      type: string
+                                    created_at:
+                                      type: string
+                                      format: date-time
+                                    updated_at:
+                                      type: string
+                                      format: date-time
+                                    Squads:
+                                      type: object
+                                      nullable: true
+                                      example: null
+                              has_project:
+                                type: object
+                                nullable: true
+                                example: null
+                  success:
+                    type: boolean
+    post:
+      tags:
+        - Projects
+      summary: Tambah proyek
+      description: Menambahkan proyek baru
       requestBody:
         required: true
         content:
@@ -1052,35 +1045,461 @@ paths:
             schema:
               type: object
               required:
-                - user_id
-                - date
-                - description
+                - name
+                - start_date
+                - end_date
+                - team
               properties:
-                user_id:
-                  type: integer
-                  example: 17
-                date:
+                name:
                   type: string
-                  format: date
-                  example: 30-12-2025
-                description:
+                start_date:
                   type: string
-                  example: Cuti tahun baru
+                  format: date-time
+                end_date:
+                  type: string
+                  format: date-time
+                team:
+                  type: array
+                  items:
+                    type: integer
       responses:
         '200':
-          description: Cuti berhasil diubah
+          description: Proyek berhasil ditambahkan
           content:
             application/json:
               schema:
                 type: object
                 properties:
                   data:
-                    $ref: '#/paths/~1leaves~1%7Bid%7D/put/components/schemas/Leave'
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      code:
+                        type: string
+                      start_date:
+                        type: string
+                        format: date-time
+                      end_date:
+                        type: string
+                        format: date-time
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                      team:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            project_id:
+                              type: integer
+                            name:
+                              type: string
+                              example: ''
+                            code:
+                              type: string
+                              example: xxx-000
+                            created_at:
+                              type: string
+                              format: date-time
+                            updated_at:
+                              type: string
+                              format: date-time
+                            SquadMembers:
+                              type: array
+                              nullable: true
+                              example: null
+                            has_project:
+                              type: object
+                              nullable: true
+                              example: null
+                  success:
+                    type: boolean
+        '400':
+          description: Permintaan tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  success:
+                    type: boolean
+                    example: false
+  '/projects/{id}':
+    put:
+      tags:
+        - Projects
+      summary: Update proyek
+      description: Memperbarui informasi proyek berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID proyek
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - start_date
+                - end_date
+                - team
+              properties:
+                name:
+                  type: string
+                start_date:
+                  type: string
+                  format: date-time
+                end_date:
+                  type: string
+                  format: date-time
+                team:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: Proyek berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      code:
+                        type: string
+                      start_date:
+                        type: string
+                        format: date-time
+                      end_date:
+                        type: string
+                        format: date-time
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                      team:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            project_id:
+                              type: integer
+                            name:
+                              type: string
+                            code:
+                              type: string
+                            created_at:
+                              type: string
+                              format: date-time
+                            updated_at:
+                              type: string
+                              format: date-time
+                            SquadMembers:
+                              type: array
+                              nullable: true
+                              example: null
+                            has_project:
+                              type: object
+                              nullable: true
+                              example: null
+                  success:
+                    type: boolean
+        '400':
+          description: Permintaan tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  success:
+                    type: boolean
+                    example: false
+    delete:
+      tags:
+        - Projects
+      summary: Hapus proyek
+      description: Menghapus proyek berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID proyek
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Proyek berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+                  message:
+                    type: string
+                    example: Project deleted successfully
+                  success:
+                    type: boolean
+        '400':
+          description: Permintaan tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  success:
+                    type: boolean
+                    example: false
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      description: Login dan mendapatkan token JWT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: dane@gmail.com
+                password:
+                  type: string
+                  format: password
+                  example: rahasia123
+      responses:
+        '200':
+          description: Login berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1auth~1login/post/components/schemas/LoginResponse'
+                  success:
+                    type: boolean
+                    example: true
+        '500':
+          description: Login gagal (email tidak ditemukan atau password salah)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data tidak ditemukan / Password tidak sesuai
+                  success:
+                    type: boolean
+                    example: false
+      components:
+        schemas:
+          LoginResponse:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 3
+              name:
+                type: string
+                example: Dane
+              email:
+                type: string
+                example: dane@gmail.com
+              token:
+                type: string
+                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+  /holidays:
+    get:
+      tags:
+        - Holidays
+      summary: Ambil semua hari libur
+      description: Mengembalikan data semua hari libur
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1holidays/get/components/schemas/Level'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          Level:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 2
+              name:
+                type: string
+                example: Lebaran
+              date:
+                type: string
+                format: date-time
+                example: '2025-07-20T00:00:00Z'
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T14:15:36.829823+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T14:30:14.4948+07:00'
+    post:
+      tags:
+        - Holidays
+      summary: Tambah hari libur
+      description: Menambahkan hari libur baru
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - date
+              properties:
+                name:
+                  type: string
+                  example: Lebaran
+                date:
+                  type: string
+                  example: '2025-07-20T00:00:00Z'
+      responses:
+        '201':
+          description: Hari libur berhasil ditambahkan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1holidays/post/components/schemas/Holiday'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          Holiday:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 6
+              name:
+                type: string
+                example: Lebaran
+              date:
+                type: string
+                format: date-time
+                example: '2025-07-20T00:00:00Z'
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:20:27.879181+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:20:27.879181+07:00'
+  '/holidays/{id}':
+    put:
+      tags:
+        - Holidays
+      summary: Ubah hari libur
+      description: Mengubah data hari libur yang sudah ada berdasarkan ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID hari libur yang ingin diubah
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - date
+              properties:
+                name:
+                  type: string
+                  example: Lebaran
+                date:
+                  type: string
+                  example: '2025-07-20T00:00:00Z'
+      responses:
+        '200':
+          description: Hari libur berhasil diubah
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1holidays~1%7Bid%7D/put/components/schemas/Holiday'
                   success:
                     type: boolean
                     example: true
         '404':
-          description: Cuti tidak ditemukan
+          description: Hari libur tidak ditemukan
           content:
             application/json:
               schema:
@@ -1094,22 +1513,19 @@ paths:
                     example: false
       components:
         schemas:
-          Leave:
+          Holiday:
             type: object
             properties:
               id:
                 type: integer
-                example: 1
-              user_id:
-                type: integer
-                example: 17
+                example: 7
+              name:
+                type: string
+                example: Lebaran
               date:
                 type: string
-                format: date
-                example: 31-12-2025
-              description:
-                type: string
-                example: Cuti tahun baru 2025
+                format: date-time
+                example: '2025-07-20T00:00:00Z'
               created_at:
                 type: string
                 format: date-time
@@ -1117,22 +1533,24 @@ paths:
               updated_at:
                 type: string
                 format: date-time
-                example: '2025-07-04T16:22:09.576943+07:00'
+                example: '2025-07-04T16:35:54.402047+07:00'
     delete:
       tags:
-        - Leaves
-      summary: Hapus data cuti
-      description: Menghapus data cuti berdasarkan ID
+        - Holidays
+      summary: Hapus hari libur
+      description: Menghapus data hari libur berdasarkan ID
+      security:
+        - BearerAuth: []
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-          description: ID cuti yang ingin dihapus
+          description: ID hari libur yang ingin dihapus
       responses:
         '200':
-          description: Cuti berhasil dihapus
+          description: Hari libur berhasil dihapus
           content:
             application/json:
               schema:
@@ -1144,12 +1562,12 @@ paths:
                     example: null
                   message:
                     type: string
-                    example: Cuti berhasil dihapus
+                    example: Hari libur berhasil dihapus
                   success:
                     type: boolean
                     example: true
         '404':
-          description: Cuti tidak ditemukan
+          description: Hari libur tidak ditemukan
           content:
             application/json:
               schema:
