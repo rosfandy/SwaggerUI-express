@@ -58,7 +58,7 @@ paths:
     put:
       $ref: ./paths/users/users.put.yaml
     delete:
-      $ref: ./paths/departments/departments.delete.yaml
+      $ref: ./paths/users/users.delete.yaml
   /projects:
     get:
       $ref: ./paths/projects/projects.get.yaml
