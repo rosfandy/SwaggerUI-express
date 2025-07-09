@@ -1,0 +1,40 @@
+tags:
+  - Projects
+summary: Hapus proyek
+description: Menghapus proyek berdasarkan ID
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: ID proyek
+    schema:
+      type: integer
+responses:
+  "200":
+    description: Proyek berhasil dihapus
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: string
+              nullable: true
+              example: null
+            message:
+              type: string
+              example: "Project deleted successfully"
+            success:
+              type: boolean
+  "400":
+    description: Permintaan tidak valid
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+            success:
+              type: boolean
+              example: false

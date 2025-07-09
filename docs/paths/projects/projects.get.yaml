@@ -1,0 +1,95 @@
+tags:
+  - Projects
+summary: Ambil semua proyek
+description: Mengembalikan data semua proyek
+responses:
+  "200":
+    description: Berhasil
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  code:
+                    type: string
+                  start_date:
+                    type: string
+                    format: date-time
+                  end_date:
+                    type: string
+                    format: date-time
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  team:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        project_id:
+                          type: integer
+                        name:
+                          type: string
+                        code:
+                          type: string
+                        created_at:
+                          type: string
+                          format: date-time
+                        updated_at:
+                          type: string
+                          format: date-time
+                        SquadMembers:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              title_id:
+                                type: integer
+                              name:
+                                type: string
+                              email:
+                                type: string
+                              email_verified_at:
+                                type: string
+                                format: date-time
+                              password:
+                                type: string
+                              remember_token:
+                                type: string
+                                nullable: true
+                              custom_fields:
+                                type: string
+                              avatar_url:
+                                type: string
+                              created_at:
+                                type: string
+                                format: date-time
+                              updated_at:
+                                type: string
+                                format: date-time
+                              Squads:
+                                type: object
+                                nullable: true
+                                example: null
+                        has_project:
+                          type: object
+                          nullable: true
+                          example: null
+            success:
+              type: boolean

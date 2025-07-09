@@ -24,8 +24,6 @@ paths:
     post:
       $ref: ./paths/titles/titles.post.yaml
   /titles/{id}:
-    get:
-      $ref: ./paths/titles/titles.getId.yaml
     put:
       $ref: ./paths/titles/titles.put.yaml
     delete:
