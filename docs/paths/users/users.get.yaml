@@ -1,0 +1,40 @@
+tags:
+  - Users
+summary: Ambil semua user
+description: Mengembalikan data semua user
+responses:
+  "200":
+    description: Berhasil
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+            success:
+              type: boolean
+              example: true
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        title_id:
+          type: integer
+          example: 0
+        name:
+          type: string
+          example: Halo
+        email:
+          type: string
+          format: email
+          example: halo@gmail.com
+        password:
+          type: string
+          example: haloabcde

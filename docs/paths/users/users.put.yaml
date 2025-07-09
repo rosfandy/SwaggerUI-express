@@ -1,0 +1,88 @@
+tags:
+  - Users
+summary: Ubah pengguna
+description: Mengubah data pengguna yang sudah ada
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: integer
+    description: ID penggguna yang akan diubah
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        requuired:
+          - name
+          - email
+          - password
+        properties:
+          name: 
+            type: string
+            example: halohai 
+          email:
+            type: string  
+            format: email
+            example: halohai@gmail.com
+          password:
+            type: string
+            example: halohaiabcde
+responses:
+  "200":
+    description: Pengguna berhasil diubah
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/User'
+            success:
+              type: boolean
+              example: true
+"404":
+    description: Pengguna tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Pengguna tidak ditemukan
+            success:
+              type: boolean
+              example: false
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 6
+        title_id:
+          type: integer
+          example: 0
+        name:
+          type: string
+          example: halohai
+        email:
+          type: string
+          format: email
+          example: halohai@gmail.com
+        password:
+          type: string
+          example: halohaiabcde
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-10-01T12:00:00Z"
+        updated_at:
+          type: string  
+          format: date-time
+          example: "2023-10-01T12:00:00Z"
