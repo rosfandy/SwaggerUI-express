@@ -1,16 +1,7 @@
 tags:
-  - Levels
-summary: Ubah level
-description: Mengubah data level yang sudah ada berdasarkan ID
-security:
-  - BearerAuth: []
-parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: integer
-    description: ID level yang ingin diubah
+  - Auth
+summary: Login
+description: Login dan mendapatkan token JWT
 requestBody:
   required: true
   content:
@@ -18,26 +9,32 @@ requestBody:
       schema:
         type: object
         required:
-          - name
+          - email
+          - password
         properties:
-          name:
+          email:
             type: string
-            example: Level 4
+            format: email
+            example: dane@gmail.com
+          password:
+            type: string
+            format: password
+            example: rahasia123
 responses:
   "200":
-    description: Level berhasil diubah
+    description: Login berhasil
     content:
       application/json:
         schema:
           type: object
           properties:
             data:
-              $ref: '#/components/schemas/Level'
+              $ref: '#/components/schemas/LoginResponse'
             success:
               type: boolean
               example: true
-  "404":
-    description: Level tidak ditemukan
+  "500":
+    description: Login gagal (email tidak ditemukan atau password salah)
     content:
       application/json:
         schema:
@@ -45,27 +42,25 @@ responses:
           properties:
             error:
               type: string
-              example: Data tidak ditemukan
+              example: Data tidak ditemukan / Password tidak sesuai
             success:
               type: boolean
               example: false
 
 components:
   schemas:
-    Level:
+    LoginResponse:
       type: object
       properties:
         id:
           type: integer
-          example: 7
+          example: 3
         name:
           type: string
-          example: Level 4
-        created_at:
+          example: Dane
+        email:
           type: string
-          format: date-time
-          example: "2025-07-04T16:22:09.576943+07:00"
-        updated_at:
+          example: dane@gmail.com
+        token:
           type: string
-          format: date-time
-          example: "2025-07-04T16:35:54.402047+07:00"
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...

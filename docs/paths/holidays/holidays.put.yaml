@@ -1,7 +1,7 @@
 tags:
-  - Levels
-summary: Ubah level
-description: Mengubah data level yang sudah ada berdasarkan ID
+  - Holidays
+summary: Ubah hari libur
+description: Mengubah data hari libur yang sudah ada berdasarkan ID
 security:
   - BearerAuth: []
 parameters:
@@ -10,7 +10,7 @@ parameters:
     required: true
     schema:
       type: integer
-    description: ID level yang ingin diubah
+    description: ID hari libur yang ingin diubah
 requestBody:
   required: true
   content:
@@ -19,25 +19,29 @@ requestBody:
         type: object
         required:
           - name
+          - date
         properties:
           name:
             type: string
-            example: Level 4
+            example: Lebaran
+          date:
+            type: string
+            example: "2025-07-20T00:00:00Z"
 responses:
   "200":
-    description: Level berhasil diubah
+    description: Hari libur berhasil diubah
     content:
       application/json:
         schema:
           type: object
           properties:
             data:
-              $ref: '#/components/schemas/Level'
+              $ref: '#/components/schemas/Holiday'
             success:
               type: boolean
               example: true
   "404":
-    description: Level tidak ditemukan
+    description: Hari libur tidak ditemukan
     content:
       application/json:
         schema:
@@ -52,7 +56,7 @@ responses:
 
 components:
   schemas:
-    Level:
+    Holiday:
       type: object
       properties:
         id:
@@ -60,7 +64,11 @@ components:
           example: 7
         name:
           type: string
-          example: Level 4
+          example: Lebaran
+        date:
+          type: string
+          format: date-time
+          example: "2025-07-20T00:00:00Z"
         created_at:
           type: string
           format: date-time

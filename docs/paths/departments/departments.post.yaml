@@ -1,0 +1,50 @@
+tags:
+  - Departments
+summary: Tambah departemen
+description: Menambahkan departemen baru
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+        properties:
+          name:
+            type: string
+responses:
+  "200":
+    description: Departemen berhasil ditambahkan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                created_at:
+                  type: string
+                  format: date-time
+                updated_at:
+                  type: string
+                  format: date-time
+            success:
+              type: boolean
+  "400":
+    description: Permintaan tidak valid
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+            success:
+              type: boolean
+              example: false

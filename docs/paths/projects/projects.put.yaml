@@ -1,0 +1,105 @@
+tags:
+  - Projects
+summary: Update proyek
+description: Memperbarui informasi proyek berdasarkan ID
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: ID proyek
+    schema:
+      type: integer
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+          - start_date
+          - end_date
+          - team
+        properties:
+          name:
+            type: string
+          start_date:
+            type: string
+            format: date-time
+          end_date:
+            type: string
+            format: date-time
+          team:
+            type: array
+            items:
+              type: integer
+responses:
+  "200":
+    description: Proyek berhasil diperbarui
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                code:
+                  type: string
+                start_date:
+                  type: string
+                  format: date-time
+                end_date:
+                  type: string
+                  format: date-time
+                created_at:
+                  type: string
+                  format: date-time
+                updated_at:
+                  type: string
+                  format: date-time
+                team:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      project_id:
+                        type: integer
+                      name:
+                        type: string
+                      code:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                      SquadMembers:
+                        type: array
+                        nullable: true
+                        example: null
+                      has_project:
+                        type: object
+                        nullable: true
+                        example: null
+            success:
+              type: boolean
+  "400":
+    description: Permintaan tidak valid
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+            success:
+              type: boolean
+              example: false

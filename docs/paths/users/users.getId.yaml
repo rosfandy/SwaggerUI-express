@@ -1,0 +1,37 @@
+tags:
+  - Users
+summary: Ambil detail user
+description: Mengambil detail user berdasarkan ID
+parameters:
+  - in: path
+    name: id
+    schema:
+      type: integer
+    required: true
+    description: ID user
+responses:
+  "200":
+    description: Berhasil mengambil data user
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+            data:
+              type: object
+              additionalProperties: true
+  "404":
+    description: User tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: false
+            error:
+              type: string

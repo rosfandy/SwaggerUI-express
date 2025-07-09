@@ -1,36 +1,33 @@
 tags:
-  - Levels
-summary: Hapus level
-description: Menghapus data level berdasarkan ID
-security:
-  - BearerAuth: []
+  - Projects
+summary: Hapus proyek
+description: Menghapus proyek berdasarkan ID
 parameters:
   - name: id
     in: path
     required: true
+    description: ID proyek
     schema:
       type: integer
-    description: ID level yang ingin dihapus
 responses:
   "200":
-    description: Level berhasil dihapus
+    description: Proyek berhasil dihapus
     content:
       application/json:
         schema:
           type: object
           properties:
             data:
+              type: string
               nullable: true
-              type: object
               example: null
             message:
               type: string
-              example: Level berhasil dihapus
+              example: "Project deleted successfully"
             success:
               type: boolean
-              example: true
-  "404":
-    description: Level tidak ditemukan
+  "400":
+    description: Permintaan tidak valid
     content:
       application/json:
         schema:
@@ -38,7 +35,6 @@ responses:
           properties:
             error:
               type: string
-              example: Data tidak ditemukan
             success:
               type: boolean
               example: false

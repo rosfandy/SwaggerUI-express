@@ -1,7 +1,7 @@
 tags:
-  - Levels
-summary: Ambil semua level
-description: Mengembalikan data semua level
+  - Holidays
+summary: Ambil semua hari libur
+description: Mengembalikan data semua hari libur
 security:
   - BearerAuth: []
 responses:
@@ -30,7 +30,11 @@ components:
           example: 2
         name:
           type: string
-          example: Level 1 updated
+          example: Lebaran
+        date:
+          type: string
+          format: date-time
+          example: "2025-07-20T00:00:00Z"
         created_at:
           type: string
           format: date-time

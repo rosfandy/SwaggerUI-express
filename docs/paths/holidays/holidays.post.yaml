@@ -1,7 +1,7 @@
 tags:
-  - Levels
-summary: Tambah level
-description: Menambahkan level baru
+  - Holidays
+summary: Tambah hari libur
+description: Menambahkan hari libur baru
 security:
   - BearerAuth: []
 requestBody:
@@ -12,27 +12,31 @@ requestBody:
         type: object
         required:
           - name
+          - date
         properties:
           name:
             type: string
-            example: Level 3
+            example: Lebaran
+          date:
+            type: string
+            example: "2025-07-20T00:00:00Z"
 responses:
   "201":
-    description: Level berhasil ditambahkan
+    description: Hari libur berhasil ditambahkan
     content:
       application/json:
         schema:
           type: object
           properties:
             data:
-              $ref: '#/components/schemas/Level'
+              $ref: '#/components/schemas/Holiday'
             success:
               type: boolean
               example: true
 
 components:
   schemas:
-    Level:
+    Holiday:
       type: object
       properties:
         id:
@@ -40,7 +44,11 @@ components:
           example: 6
         name:
           type: string
-          example: Level 3
+          example: "Lebaran"
+        date:
+          type: string
+          format: date-time
+          example: "2025-07-20T00:00:00Z"
         created_at:
           type: string
           format: date-time

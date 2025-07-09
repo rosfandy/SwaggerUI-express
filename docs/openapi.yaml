@@ -1,10 +1,20 @@
 openapi: 3.0.0
+
 info:
   title: OpenAPI
   description: Dokumentasi OpenAPI
   version: 1.0.0
+  security:
+    - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 servers:
   - url: http://127.0.0.1:5000/api/v1
+  - url: https://jk-go-52014148654.asia-southeast2.run.app/api/v1
 paths:
   /hello:
     $ref: ./paths/hello/hello.get.yaml
@@ -16,7 +26,9 @@ paths:
   /levels/{id}:
     put:
       $ref: ./paths/levels/levels.put.yaml
-    delete:
+    get:
+      $ref: ./paths/levels/levels.put.yaml
+    post:
       $ref: ./paths/levels/levels.delete.yaml
   /titles:
     get:
@@ -24,12 +36,11 @@ paths:
     post:
       $ref: ./paths/titles/titles.post.yaml
   /titles/{id}:
-    get:
-      $ref: ./paths/titles/titles.getId.yaml
     put:
       $ref: ./paths/titles/titles.put.yaml
     delete:
       $ref: ./paths/titles/titles.delete.yaml
+
   /positions:
     get:
       $ref: ./paths/positions/positions.get.yaml
@@ -40,3 +51,36 @@ paths:
       $ref: ./paths/positions/positions.put.yaml
     delete:
       $ref: ./paths/positions/positions.delete.yaml
+  /users:
+    get:
+      $ref: ./paths/users/users.get.yaml
+    post:
+      $ref: ./paths/users/users.post.yaml
+  /users/{id}:
+    put:
+      $ref: ./paths/users/users.put.yaml
+    delete:
+      $ref: ./paths/users/users.delete.yaml
+  /projects:
+    get:
+      $ref: ./paths/projects/projects.get.yaml
+    post:
+      $ref: ./paths/projects/projects.post.yaml
+  /projects/{id}:
+    put:
+      $ref: ./paths/projects/projects.put.yaml
+    delete:
+      $ref: ./paths/projects/projects.delete.yaml
+  /auth/login:
+    post:
+      $ref: ./paths/auth/login.post.yaml
+  /holidays:
+    get:
+      $ref: ./paths/holidays/holidays.get.yaml
+    post:
+      $ref: ./paths/holidays/holidays.post.yaml
+  /holidays/{id}:
+    put:
+      $ref: ./paths/holidays/holidays.put.yaml
+    delete:
+      $ref: ./paths/holidays/holidays.delete.yaml
