@@ -1,7 +1,7 @@
 tags:
-  - Users
-summary: Ambil semua user
-description: Mengembalikan data semua user
+  - Levels
+summary: Ambil semua level
+description: Mengembalikan data semua level
 responses:
   "200":
     description: Berhasil
@@ -13,28 +13,27 @@ responses:
             data:
               type: array
               items:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Level'
             success:
               type: boolean
               example: true
+
 components:
   schemas:
-    User:
+    Level:
       type: object
       properties:
         id:
           type: integer
           example: 2
-        title_id:
-          type: integer
-          example: 0
         name:
           type: string
-          example: Halo
-        email:
+          example: Level 1 updated
+        created_at:
           type: string
-          format: email
-          example: halo@gmail.com
-        password:
+          format: date-time
+          example: "2025-07-04T14:15:36.829823+07:00"
+        updated_at:
           type: string
-          example: haloabcde
+          format: date-time
+          example: "2025-07-04T14:30:14.4948+07:00"

@@ -1,0 +1,42 @@
+tags:
+  - Leaves
+summary: Hapus data cuti
+description: Menghapus data cuti berdasarkan ID
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: integer
+    description: ID cuti yang ingin dihapus
+responses:
+  "200":
+    description: Cuti berhasil dihapus
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              nullable: true
+              type: object
+              example: null
+            message:
+              type: string
+              example: Cuti berhasil dihapus
+            success:
+              type: boolean
+              example: true
+  "404":
+    description: Cuti tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              example: Data tidak ditemukan
+            success:
+              type: boolean
+              example: false

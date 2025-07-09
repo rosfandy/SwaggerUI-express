@@ -4,12 +4,22 @@ info:
   description: Dokumentasi OpenAPI
   version: 1.0.0
 servers:
-  - url: http://localhost:5000/api/v1
-  - url: http://localhost:5123/api
+  - url: http://127.0.0.1:5000/api/v1
 paths:
   /hello:
     $ref: ./paths/hello/hello.get.yaml
-  /users:
+  /levels:
+    get:
+      $ref: ./paths/levels/levels.get.yaml
+    post:
+      $ref: ./paths/levels/levels.post.yaml
+  /levels/{id}:
+    put:
+      $ref: ./paths/levels/levels.put.yaml
+    delete:
+      $ref: ./paths/levels/levels.delete.yaml
+
+  /users:   
     get:
       $ref: ./paths/users/users.get.yaml
     post:
@@ -19,3 +29,38 @@ paths:
       $ref: ./paths/users/users.put.yaml
     delete:
       $ref: ./paths/users/users.delete.yaml
+
+  /titles:
+    get:
+      $ref: ./paths/titles/titles.get.yaml
+    post:
+      $ref: ./paths/titles/titles.post.yaml
+  /titles/{id}:
+    get:
+      $ref: ./paths/titles/titles.getId.yaml
+    put:
+      $ref: ./paths/titles/titles.put.yaml
+    delete:
+      $ref: ./paths/titles/titles.delete.yaml
+
+  /positions:
+    get:
+      $ref: ./paths/positions/positions.get.yaml
+    post:
+      $ref: ./paths/positions/positions.post.yaml
+  /positions/{id}:
+    put:
+      $ref: ./paths/positions/positions.put.yaml
+    delete:
+      $ref: ./paths/positions/positions.delete.yaml
+
+  /leaves:
+    get:
+      $ref: ./paths/leaves/leaves.get.yaml
+    post:
+      $ref: ./paths/leaves/leaves.post.yaml
+  /leaves/{id}:
+    put:
+      $ref: ./paths/leaves/leaves.put.yaml
+    delete:
+      $ref: ./paths/leaves/leaves.delete.yaml
