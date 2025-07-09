@@ -22,6 +22,11 @@ paths:
       $ref: ./paths/levels/levels.get.yaml
     post:
       $ref: ./paths/levels/levels.post.yaml
+  /levels/{id}:
+    get:
+      $ref: ./paths/levels/levels.put.yaml
+    post:
+      $ref: ./paths/levels/levels.delete.yaml
   /titles:
     get:
       $ref: ./paths/titles/titles.get.yaml
@@ -47,3 +52,13 @@ paths:
   /auth/login:
     post:
       $ref: ./paths/auth/login.post.yaml
+  /holidays:
+    get:
+      $ref: ./paths/holidays/holidays.get.yaml
+    post:
+      $ref: ./paths/holidays/holidays.post.yaml
+  /holidays/{id}:
+    put:
+      $ref: ./paths/holidays/holidays.put.yaml
+    delete:
+      $ref: ./paths/holidays/holidays.delete.yaml
