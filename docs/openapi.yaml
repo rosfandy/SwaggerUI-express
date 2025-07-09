@@ -38,6 +38,16 @@ paths:
       $ref: ./paths/positions/positions.put.yaml
     delete:
       $ref: ./paths/positions/positions.delete.yaml
+  /departments:
+    get:
+      $ref: ./paths/departments/departments.get.yaml
+    post:
+      $ref: ./paths/departments/departments.post.yaml
+  /departments/{id}:
+    put:
+      $ref: ./paths/departments/departments.put.yaml
+    delete:
+      $ref: ./paths/departments/departments.delete.yaml
   /projects:
     get:
       $ref: ./paths/projects/projects.get.yaml

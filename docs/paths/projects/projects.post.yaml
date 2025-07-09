@@ -12,6 +12,7 @@ requestBody:
           - name
           - start_date
           - end_date
+          - team
         properties:
           name:
             type: string
@@ -21,6 +22,10 @@ requestBody:
           end_date:
             type: string
             format: date-time
+          team:
+            type: array
+            items:
+              type: integer
 responses:
   "200":
     description: Proyek berhasil ditambahkan
@@ -50,6 +55,35 @@ responses:
                 updated_at:
                   type: string
                   format: date-time
+                team:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      project_id:
+                        type: integer
+                      name:
+                        type: string
+                        example: ""
+                      code:
+                        type: string
+                        example: "xxx-000"
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                      SquadMembers:
+                        type: array
+                        nullable: true
+                        example: null
+                      has_project:
+                        type: object
+                        nullable: true
+                        example: null
             success:
               type: boolean
   "400":
