@@ -1,0 +1,1163 @@
+openapi: 3.0.0
+info:
+  title: OpenAPI
+  description: Dokumentasi OpenAPI
+  version: 1.0.0
+servers:
+  - url: 'http://127.0.0.1:5000/api/v1'
+paths:
+  /hello:
+    get:
+      tags:
+        - Hello World
+      summary: Hello World
+      description: Mengembalikan pesan Hello World
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Hello, world!'
+  /levels:
+    get:
+      tags:
+        - Levels
+      summary: Ambil semua level
+      description: Mengembalikan data semua level
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1levels/get/components/schemas/Level'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          Level:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 2
+              name:
+                type: string
+                example: Level 1 updated
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T14:15:36.829823+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T14:30:14.4948+07:00'
+    post:
+      tags:
+        - Levels
+      summary: Tambah level
+      description: Menambahkan level baru
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  example: Level 3
+      responses:
+        '201':
+          description: Level berhasil ditambahkan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1levels/post/components/schemas/Level'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          Level:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 6
+              name:
+                type: string
+                example: Level 3
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:20:27.879181+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:20:27.879181+07:00'
+  '/levels/{id}':
+    put:
+      tags:
+        - Levels
+      summary: Ubah level
+      description: Mengubah data level yang sudah ada berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID level yang ingin diubah
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  example: Level 4
+      responses:
+        '200':
+          description: Level berhasil diubah
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1levels~1%7Bid%7D/put/components/schemas/Level'
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          description: Level tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false
+      components:
+        schemas:
+          Level:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 7
+              name:
+                type: string
+                example: Level 4
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:22:09.576943+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:35:54.402047+07:00'
+    delete:
+      tags:
+        - Levels
+      summary: Hapus level
+      description: Menghapus data level berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID level yang ingin dihapus
+      responses:
+        '200':
+          description: Level berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    nullable: true
+                    type: object
+                    example: null
+                  message:
+                    type: string
+                    example: Level berhasil dihapus
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          description: Level tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Ambil semua user
+      description: Mengembalikan data semua user
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1users/get/components/schemas/User'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          User:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 2
+              title_id:
+                type: integer
+                example: 0
+              name:
+                type: string
+                example: Halo
+              email:
+                type: string
+                format: email
+                example: halo@gmail.com
+              password:
+                type: string
+                example: haloabcde
+    post:
+      tags:
+        - Users
+      summary: Tambah pengguna
+      description: Menambahkan pengguna baru
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - password
+              properties:
+                name:
+                  type: string
+                  example: nmae6
+                email:
+                  type: string
+                  example: name6@gmail.com
+                password:
+                  type: string
+                  example: name6abcde
+      responses:
+        '201':
+          description: Pengguna berhasil ditambahkan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1users/post/components/schemas/User'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          User:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+              title_id:
+                type: integer
+                example: 0
+              name:
+                type: string
+                example: name6
+              email:
+                type: string
+                format: email
+                example: name6@gmail.com
+              password:
+                type: string
+                example: name6abcde
+              created_at:
+                type: string
+                format: date-time
+                example: '2023-10-01T12:00:00Z'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2023-10-01T12:00:00Z'
+  '/users/{id}':
+    put:
+      '404':
+        description: Pengguna tidak ditemukan
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Pengguna tidak ditemukan
+                success:
+                  type: boolean
+                  example: false
+      tags:
+        - Users
+      summary: Ubah pengguna
+      description: Mengubah data pengguna yang sudah ada
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID penggguna yang akan diubah
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              requuired:
+                - name
+                - email
+                - password
+              properties:
+                name:
+                  type: string
+                  example: halohai
+                email:
+                  type: string
+                  format: email
+                  example: halohai@gmail.com
+                password:
+                  type: string
+                  example: halohaiabcde
+      responses:
+        '200':
+          description: Pengguna berhasil diubah
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1users~1%7Bid%7D/put/components/schemas/User'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          User:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 6
+              title_id:
+                type: integer
+                example: 0
+              name:
+                type: string
+                example: halohai
+              email:
+                type: string
+                format: email
+                example: halohai@gmail.com
+              password:
+                type: string
+                example: halohaiabcde
+              created_at:
+                type: string
+                format: date-time
+                example: '2023-10-01T12:00:00Z'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2023-10-01T12:00:00Z'
+    delete:
+      tags:
+        - Users
+      summary: Hapus pengguna
+      description: Menghapus pengguna berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID pengguna yang akan dihapus
+      responses:
+        '200':
+          description: Pengguna berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Pengguna berhasil dihapus
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          description: Pengguna tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Pengguna tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false
+  /titles:
+    get:
+      tags:
+        - Titles
+      summary: Ambil semua title
+      description: Mengembalikan data semua title
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  titles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        title:
+                          type: string
+    post:
+      tags:
+        - Titles
+      summary: Buat title baru
+      description: Membuat title baru dengan data yang diberikan
+      requestBody:
+        description: Data title baru
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nama title
+                position_id:
+                  type: integer
+                  description: ID posisi
+                department_id:
+                  type: integer
+                  description: ID departemen
+                level_id:
+                  type: integer
+                  description: ID level
+              required:
+                - name
+                - position_id
+                - department_id
+                - level_id
+      responses:
+        '201':
+          description: Berhasil membuat title baru
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID title
+                      name:
+                        type: string
+                        description: Nama title
+                      department_id:
+                        type: integer
+                        description: ID departemen
+                      position_id:
+                        type: integer
+                        description: ID posisi
+                      level_id:
+                        type: integer
+                        description: ID level
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Waktu pembuatan
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Waktu pembaruan
+                  success:
+                    type: boolean
+                    description: Status keberhasilan
+  '/titles/{id}':
+    get:
+      tags:
+        - Titles
+    put:
+      tags:
+        - Titles
+      summary: Perbarui title
+      description: Memperbarui title berdasarkan ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID title
+      requestBody:
+        description: Data title yang diperbarui
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nama title
+                position_id:
+                  type: integer
+                  description: ID posisi
+                department_id:
+                  type: integer
+                  description: ID departemen
+                level_id:
+                  type: integer
+                  description: ID level
+      responses:
+        '200':
+          description: Berhasil memperbarui title
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID title
+                      name:
+                        type: string
+                        description: Nama title
+                      department_id:
+                        type: integer
+                        description: ID departemen
+                      position_id:
+                        type: integer
+                        description: ID posisi
+                      level_id:
+                        type: integer
+                        description: ID level
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Waktu pembaruan
+                  success:
+                    type: boolean
+                    description: Status keberhasilan
+        '404':
+          description: Title tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Status keberhasilan
+                  message:
+                    type: string
+                    description: Pesan kesalahan
+    delete:
+      tags:
+        - Titles
+      summary: Hapus title
+      description: Menghapus title berdasarkan ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID title
+      responses:
+        '204':
+          description: Berhasil menghapus title
+        '404':
+          description: Title tidak ditemukan
+  /positions:
+    get:
+      tags:
+        - Positions
+      summary: Ambil semua posisi
+      description: Mengembalikan data semua posisi beserta informasi departemen
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: Backend Developer
+                        department_id:
+                          type: integer
+                          example: 2
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: '2025-07-04T13:51:51.901876+07:00'
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: '2025-07-04T13:53:29.343153+07:00'
+                        has_department:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 2
+                            name:
+                              type: string
+                              example: HR
+                            created_at:
+                              type: string
+                              format: date-time
+                              example: '2025-07-04T13:52:49.041189+07:00'
+                            updated_at:
+                              type: string
+                              format: date-time
+                              example: '2025-07-04T13:52:49.041769+07:00'
+                  success:
+                    type: boolean
+                    example: true
+    post:
+      tags:
+        - Positions
+      summary: Buat posisi baru
+      description: Membuat posisi baru dan mengembalikan data posisi yang telah dibuat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - department_id
+              properties:
+                name:
+                  type: string
+                  example: Frontend Developer
+                  description: Nama posisi
+                department_id:
+                  type: integer
+                  example: 1
+                  description: ID departemen
+      responses:
+        '201':
+          description: Posisi berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      name:
+                        type: string
+                        example: Frontend Developer
+                      department_id:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: '2025-07-04T14:04:06.937432+07:00'
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: '2025-07-04T14:04:06.937432+07:00'
+                  success:
+                    type: boolean
+                    example: true
+        '400':
+          description: Data tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Data tidak valid
+  '/positions/{id}':
+    put:
+      tags:
+        - Positions
+      summary: Update posisi
+      description: Mengupdate posisi yang sudah ada dan mengembalikan data posisi yang telah diupdate
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID posisi yang akan diupdate
+          example: 3
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Frontend Developesr
+                  description: Nama posisi baru
+                department_id:
+                  type: integer
+                  example: 1
+                  description: ID departemen baru
+      responses:
+        '200':
+          description: Posisi berhasil diupdate
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      name:
+                        type: string
+                        example: Frontend Developesr
+                      department_id:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: '2025-07-04T14:04:06.937432+07:00'
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: '2025-07-04T14:05:04.99301+07:00'
+                  success:
+                    type: boolean
+                    example: true
+        '400':
+          description: Data tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Data tidak valid
+        '404':
+          description: Posisi tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Posisi tidak ditemukan
+    delete:
+      tags:
+        - Positions
+      summary: Hapus posisi
+      description: Menghapus posisi berdasarkan ID yang diberikan
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID posisi yang akan dihapus
+          example: 3
+      responses:
+        '200':
+          description: Posisi berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: 'null'
+                    example: null
+                  message:
+                    type: string
+                    example: Position deleted successfully
+                  success:
+                    type: boolean
+                    example: true
+        '400':
+          description: ID tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: 'null'
+                    example: null
+                  message:
+                    type: string
+                    example: Invalid ID
+                  success:
+                    type: boolean
+                    example: false
+        '404':
+          description: Posisi tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: 'null'
+                    example: null
+                  message:
+                    type: string
+                    example: Position not found
+                  success:
+                    type: boolean
+                    example: false
+  /leaves:
+    get:
+      tags:
+        - Leaves
+      summary: Ambil semua data cuti
+      description: Mengembalikan data semua cuti yang ada
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1leaves/get/components/schemas/Leave'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          Leave:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              user_id:
+                type: integer
+                example: 17
+              date:
+                type: string
+                format: date
+                example: 04-07-2025
+              description:
+                type: string
+                example: Cuti tahunan
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:22:09.576943+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:22:09.576943+07:00'
+    post:
+      tags:
+        - Leaves
+      summary: Tambah data cuti
+      description: Menambahkan data cuti baru
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - date
+                - description
+              properties:
+                user_id:
+                  type: integer
+                  example: 17
+                date:
+                  type: string
+                  format: date
+                  example: 30-12-2025
+                description:
+                  type: string
+                  example: Cuti tahun baru
+      responses:
+        '201':
+          description: Cuti berhasil ditambahkan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1leaves/post/components/schemas/Leave'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          Leave:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              user_id:
+                type: integer
+                example: 17
+              date:
+                type: string
+                format: date
+                example: 30-12-2025
+              description:
+                type: string
+                example: Cuti tahun baru
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:22:09.576943+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:22:09.576943+07:00'
+  '/leaves/{id}':
+    put:
+      tags:
+        - Leaves
+      summary: Ubah data cuti
+      description: Mengubah data cuti berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID cuti yang ingin diubah
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - date
+                - description
+              properties:
+                user_id:
+                  type: integer
+                  example: 17
+                date:
+                  type: string
+                  format: date
+                  example: 30-12-2025
+                description:
+                  type: string
+                  example: Cuti tahun baru
+      responses:
+        '200':
+          description: Cuti berhasil diubah
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1leaves~1%7Bid%7D/put/components/schemas/Leave'
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          description: Cuti tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false
+      components:
+        schemas:
+          Leave:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              user_id:
+                type: integer
+                example: 17
+              date:
+                type: string
+                format: date
+                example: 31-12-2025
+              description:
+                type: string
+                example: Cuti tahun baru 2025
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:22:09.576943+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:22:09.576943+07:00'
+    delete:
+      tags:
+        - Leaves
+      summary: Hapus data cuti
+      description: Menghapus data cuti berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID cuti yang ingin dihapus
+      responses:
+        '200':
+          description: Cuti berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    nullable: true
+                    type: object
+                    example: null
+                  message:
+                    type: string
+                    example: Cuti berhasil dihapus
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          description: Cuti tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false

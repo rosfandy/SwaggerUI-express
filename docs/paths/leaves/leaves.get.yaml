@@ -1,9 +1,7 @@
 tags:
-  - Levels
-summary: Ambil semua level
-description: Mengembalikan data semua level
-security:
-  - BearerAuth: []
+ - Leaves
+summary: Ambil semua data cuti
+description: Mengembalikan data semua cuti yang ada
 responses:
   "200":
     description: Berhasil
@@ -15,27 +13,34 @@ responses:
             data:
               type: array
               items:
-                $ref: '#/components/schemas/Level'
+                $ref: '#/components/schemas/Leave'
             success:
               type: boolean
               example: true
-
+            
 components:
-  schemas:
-    Level:
+  schemas:  
+    Leave:
       type: object
       properties:
         id:
           type: integer
-          example: 2
-        name:
+          example: 1
+        user_id:
+          type: integer
+          example: 17
+        date:
           type: string
-          example: Level 1 updated
+          format: date
+          example: "04-07-2025"
+        description:
+          type: string
+          example: "Cuti tahunan"
         created_at:
           type: string
           format: date-time
-          example: "2025-07-04T14:15:36.829823+07:00"
+          example: "2025-07-04T16:22:09.576943+07:00"
         updated_at:
           type: string
           format: date-time
-          example: "2025-07-04T14:30:14.4948+07:00"
+          example: "2025-07-04T16:22:09.576943+07:00"

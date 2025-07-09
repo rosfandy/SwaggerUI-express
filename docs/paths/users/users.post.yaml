@@ -1,0 +1,67 @@
+tags:
+  - Users
+summary: Tambah pengguna
+description: Menambahkan pengguna baru
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+          - email
+          - password
+        properties:
+          name:
+            type: string
+            example: nmae6
+          email:
+            type: string
+            example: name6@gmail.com
+          password:
+            type: string
+            example: name6abcde
+responses:
+  "201":
+    description: Pengguna berhasil ditambahkan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/User'
+            success:
+              type: boolean
+              example: true
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+        title_id:
+          type: integer
+          example: 0
+        name:
+          type: string
+          example: name6
+        email:
+          type: string
+          format: email
+          example: name6@gmail.com
+        password:
+          type: string  
+          example: name6abcde
+        created_at:
+          type: string
+          format: date-time
+          example: '2023-10-01T12:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2023-10-01T12:00:00Z'
