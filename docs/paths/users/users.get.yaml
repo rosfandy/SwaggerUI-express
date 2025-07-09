@@ -1,0 +1,33 @@
+tags:
+  - Users
+summary: Ambil semua user
+description: Mengambil daftar semua user
+responses:
+  "200":
+    description: Berhasil mengambil semua user
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+            data:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+  "500":
+    description: Terjadi kesalahan server
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: false
+            error:
+              type: string
+              example: Terjadi kesalahan saat mengambil data user

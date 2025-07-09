@@ -40,3 +40,13 @@ paths:
       $ref: ./paths/positions/positions.put.yaml
     delete:
       $ref: ./paths/positions/positions.delete.yaml
+  /users:
+    get:
+      $ref: ./paths/users/users.get.yaml
+    post:
+      $ref: ./paths/users/users.post.yaml
+  /users/{id}:
+    put:
+      $ref: ./paths/users/users.put.yaml
+    delete:
+      $ref: ./paths/users/users.delete.yaml

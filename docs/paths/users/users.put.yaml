@@ -1,0 +1,68 @@
+tags:
+  - Users
+summary: Perbarui user
+description: Memperbarui user berdasarkan ID
+parameters:
+  - in: path
+    name: id
+    schema:
+      type: integer
+    required: true
+    description: ID user
+requestBody:
+  description: Data user yang diperbarui
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Nama user
+          email:
+            type: string
+            format: email
+            description: Email user
+          password:
+            type: string
+            description: Password user
+          title_id:
+            type: integer
+            format: int64
+            description: ID title
+          role_ids:
+            type: array
+            items:
+              type: integer
+              format: int64
+            description: Daftar ID role yang dimiliki user
+responses:
+  "200":
+    description: Berhasil memperbarui user
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+              description: Status keberhasilan
+            data:
+              type: object
+              additionalProperties: true
+  "404":
+    description: User tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: false
+              description: Status gagal
+            error:
+              type: string
+              description: Pesan kesalahan
