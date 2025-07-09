@@ -13,7 +13,7 @@ responses:
             data:
               type: array
               items:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
             success:
               type: boolean
               example: true

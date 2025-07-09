@@ -49,14 +49,14 @@ paths:
       $ref: ./paths/positions/positions.put.yaml
     delete:
       $ref: ./paths/positions/positions.delete.yaml
-  /departments:
+  /users:
     get:
-      $ref: ./paths/departments/departments.get.yaml
+      $ref: ./paths/users/users.get.yaml
     post:
-      $ref: ./paths/departments/departments.post.yaml
-  /departments/{id}:
+      $ref: ./paths/users/users.post.yaml
+  /users/{id}:
     put:
-      $ref: ./paths/departments/departments.put.yaml
+      $ref: ./paths/users/users.put.yaml
     delete:
       $ref: ./paths/departments/departments.delete.yaml
   /projects:

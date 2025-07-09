@@ -31,7 +31,7 @@ responses:
           type: object
           properties:
             data:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
             success:
               type: boolean
               example: true
@@ -55,13 +55,13 @@ components:
           format: email
           example: name6@gmail.com
         password:
-          type: string  
+          type: string
           example: name6abcde
         created_at:
           type: string
           format: date-time
-          example: '2023-10-01T12:00:00Z'
+          example: "2023-10-01T12:00:00Z"
         updated_at:
           type: string
           format: date-time
-          example: '2023-10-01T12:00:00Z'
+          example: "2023-10-01T12:00:00Z"

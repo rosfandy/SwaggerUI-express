@@ -20,11 +20,11 @@ requestBody:
           - email
           - password
         properties:
-          name: 
+          name:
             type: string
-            example: halohai 
+            example: halohai
           email:
-            type: string  
+            type: string
             format: email
             example: halohai@gmail.com
           password:
@@ -39,23 +39,23 @@ responses:
           type: object
           properties:
             data:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
             success:
               type: boolean
               example: true
 "404":
-    description: Pengguna tidak ditemukan
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            message:
-              type: string
-              example: Pengguna tidak ditemukan
-            success:
-              type: boolean
-              example: false
+  description: Pengguna tidak ditemukan
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          message:
+            type: string
+            example: Pengguna tidak ditemukan
+          success:
+            type: boolean
+            example: false
 
 components:
   schemas:
@@ -83,6 +83,6 @@ components:
           format: date-time
           example: "2023-10-01T12:00:00Z"
         updated_at:
-          type: string  
+          type: string
           format: date-time
           example: "2023-10-01T12:00:00Z"

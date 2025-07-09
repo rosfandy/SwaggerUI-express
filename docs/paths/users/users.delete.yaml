@@ -24,7 +24,7 @@ responses:
               type: boolean
               example: true
   "404":
-    description: Pengguna tidak ditemukan 
+    description: Pengguna tidak ditemukan
     content:
       application/json:
         schema:
