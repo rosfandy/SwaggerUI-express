@@ -13,14 +13,17 @@ paths:
       $ref: ./paths/levels/levels.get.yaml
     post:
       $ref: ./paths/levels/levels.post.yaml
+  /levels/{id}:
+    put:
+      $ref: ./paths/levels/levels.put.yaml
+    delete:
+      $ref: ./paths/levels/levels.delete.yaml
   /titles:
     get:
       $ref: ./paths/titles/titles.get.yaml
     post:
       $ref: ./paths/titles/titles.post.yaml
   /titles/{id}:
-    get:
-      $ref: ./paths/titles/titles.getId.yaml
     put:
       $ref: ./paths/titles/titles.put.yaml
     delete:
@@ -35,3 +38,23 @@ paths:
       $ref: ./paths/positions/positions.put.yaml
     delete:
       $ref: ./paths/positions/positions.delete.yaml
+  /departments:
+    get:
+      $ref: ./paths/departments/departments.get.yaml
+    post:
+      $ref: ./paths/departments/departments.post.yaml
+  /departments/{id}:
+    put:
+      $ref: ./paths/departments/departments.put.yaml
+    delete:
+      $ref: ./paths/departments/departments.delete.yaml
+  /projects:
+    get:
+      $ref: ./paths/projects/projects.get.yaml
+    post:
+      $ref: ./paths/projects/projects.post.yaml
+  /projects/{id}:
+    put:
+      $ref: ./paths/projects/projects.put.yaml
+    delete:
+      $ref: ./paths/projects/projects.delete.yaml

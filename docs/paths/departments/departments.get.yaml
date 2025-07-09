@@ -1,0 +1,29 @@
+tags:
+  - Departments
+summary: Ambil semua departemen
+description: Mengembalikan data semua departemen
+responses:
+  "200":
+    description: Berhasil
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+            success:
+              type: boolean
