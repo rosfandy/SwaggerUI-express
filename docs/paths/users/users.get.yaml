@@ -1,33 +1,40 @@
 tags:
   - Users
 summary: Ambil semua user
-description: Mengambil daftar semua user
+description: Mengembalikan data semua user
 responses:
   "200":
-    description: Berhasil mengambil semua user
+    description: Berhasil
     content:
       application/json:
         schema:
           type: object
           properties:
-            success:
-              type: boolean
-              example: true
             data:
               type: array
               items:
-                type: object
-                additionalProperties: true
-  "500":
-    description: Terjadi kesalahan server
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
+                $ref: "#/components/schemas/User"
             success:
               type: boolean
-              example: false
-            error:
-              type: string
-              example: Terjadi kesalahan saat mengambil data user
+              example: true
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        title_id:
+          type: integer
+          example: 0
+        name:
+          type: string
+          example: Halo
+        email:
+          type: string
+          format: email
+          example: halo@gmail.com
+        password:
+          type: string
+          example: haloabcde

@@ -1,19 +1,17 @@
 tags:
-  - Levels
-summary: Hapus level
-description: Menghapus data level berdasarkan ID
-security:
-  - BearerAuth: []
+  - Leaves
+summary: Hapus data cuti
+description: Menghapus data cuti berdasarkan ID
 parameters:
   - name: id
     in: path
     required: true
     schema:
       type: integer
-    description: ID level yang ingin dihapus
+    description: ID cuti yang ingin dihapus
 responses:
   "200":
-    description: Level berhasil dihapus
+    description: Cuti berhasil dihapus
     content:
       application/json:
         schema:
@@ -25,12 +23,12 @@ responses:
               example: null
             message:
               type: string
-              example: Level berhasil dihapus
+              example: Cuti berhasil dihapus
             success:
               type: boolean
               example: true
   "404":
-    description: Level tidak ditemukan
+    description: Cuti tidak ditemukan
     content:
       application/json:
         schema:

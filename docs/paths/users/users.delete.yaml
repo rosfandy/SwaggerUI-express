@@ -1,37 +1,38 @@
 tags:
   - Users
-summary: Hapus user
-description: Menghapus user berdasarkan ID
+summary: Hapus pengguna
+description: Menghapus pengguna berdasarkan ID
 parameters:
-  - in: path
-    name: id
+  - name: id
+    in: path
+    required: true
     schema:
       type: integer
-    required: true
-    description: ID user
+    description: ID pengguna yang akan dihapus
 responses:
   "200":
-    description: User berhasil dihapus
+    description: Pengguna berhasil dihapus
     content:
       application/json:
         schema:
           type: object
           properties:
+            message:
+              type: string
+              example: Pengguna berhasil dihapus
             success:
               type: boolean
               example: true
-            message:
-              type: string
-              example: User berhasil dihapus
   "404":
-    description: User tidak ditemukan
+    description: Pengguna tidak ditemukan
     content:
       application/json:
         schema:
           type: object
           properties:
+            message:
+              type: string
+              example: Pengguna tidak ditemukan
             success:
               type: boolean
               example: false
-            error:
-              type: string

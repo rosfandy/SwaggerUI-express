@@ -1,0 +1,64 @@
+tags:
+  - Leaves
+summary: Tambah data cuti
+description: Menambahkan data cuti baru
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - user_id
+          - date
+          - description
+        properties:
+          user_id:
+            type: integer
+            example: 17
+          date:
+            type: string
+            format: date
+            example: "30-12-2025"
+          description:
+            type: string
+            example: "Cuti tahun baru"
+responses:
+  "201":
+    description: Cuti berhasil ditambahkan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/Leave'
+            success:
+              type: boolean
+              example: true
+components:
+  schemas:
+    Leave:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        user_id:
+          type: integer
+          example: 17
+        date:
+          type: string
+          format: date
+          example: "30-12-2025"
+        description:
+          type: string
+          example: "Cuti tahun baru"
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:22:09.576943+07:00"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:22:09.576943+07:00"
