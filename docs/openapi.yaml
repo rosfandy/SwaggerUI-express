@@ -13,6 +13,7 @@ components:
       bearerFormat: JWT
 servers:
   - url: http://127.0.0.1:5000/api/v1
+  - url: https://jk-go-52014148654.asia-southeast2.run.app/api/v1
 paths:
   /hello:
     $ref: ./paths/hello/hello.get.yaml
