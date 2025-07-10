@@ -992,7 +992,7 @@ paths:
                               updated_at:
                                 type: string
                                 format: date-time
-                              SquadMembers:
+                              users:
                                 type: array
                                 items:
                                   type: object
@@ -1008,8 +1008,6 @@ paths:
                                     email_verified_at:
                                       type: string
                                       format: date-time
-                                    password:
-                                      type: string
                                     remember_token:
                                       type: string
                                       nullable: true
@@ -1023,11 +1021,49 @@ paths:
                                     updated_at:
                                       type: string
                                       format: date-time
-                                    Squads:
+                                    title:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: integer
+                                        name:
+                                          type: string
+                                          example: ''
+                                        department_id:
+                                          type: integer
+                                        position_id:
+                                          type: integer
+                                        level_id:
+                                          type: integer
+                                        created_at:
+                                          type: string
+                                          format: date-time
+                                          example: '0001-01-01T00:00:00Z'
+                                        updated_at:
+                                          type: string
+                                          format: date-time
+                                          example: '0001-01-01T00:00:00Z'
+                                        department:
+                                          type: object
+                                          nullable: true
+                                          example: null
+                                        position:
+                                          type: object
+                                          nullable: true
+                                          example: null
+                                        level:
+                                          type: object
+                                          nullable: true
+                                          example: null
+                                    squads:
                                       type: object
                                       nullable: true
                                       example: null
-                              has_project:
+                                    has_roles:
+                                      type: object
+                                      nullable: true
+                                      example: null
+                              projects:
                                 type: object
                                 nullable: true
                                 example: null
@@ -1112,11 +1148,11 @@ paths:
                             updated_at:
                               type: string
                               format: date-time
-                            SquadMembers:
+                            users:
                               type: array
                               nullable: true
                               example: null
-                            has_project:
+                            projects:
                               type: object
                               nullable: true
                               example: null
@@ -1202,31 +1238,8 @@ paths:
                         format: date-time
                       team:
                         type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                            project_id:
-                              type: integer
-                            name:
-                              type: string
-                            code:
-                              type: string
-                            created_at:
-                              type: string
-                              format: date-time
-                            updated_at:
-                              type: string
-                              format: date-time
-                            SquadMembers:
-                              type: array
-                              nullable: true
-                              example: null
-                            has_project:
-                              type: object
-                              nullable: true
-                              example: null
+                        nullable: true
+                        example: null
                   success:
                     type: boolean
         '400':
@@ -1576,6 +1589,431 @@ paths:
                   error:
                     type: string
                     example: Data tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false
+  /roles:
+    get:
+      tags:
+        - Roles
+      summary: Ambil semua peran
+      description: Mengembalikan data semua peran
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        created_at:
+                          type: string
+                          format: date-time
+                        updated_at:
+                          type: string
+                          format: date-time
+                        has_permission:
+                          type: array
+                          nullable: true
+                          example: null
+                        has_user:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              title_id:
+                                type: integer
+                              name:
+                                type: string
+                              email:
+                                type: string
+                              email_verified_at:
+                                type: string
+                                format: date-time
+                              remember_token:
+                                type: string
+                                nullable: true
+                              custom_fields:
+                                type: string
+                              avatar_url:
+                                type: string
+                              created_at:
+                                type: string
+                                format: date-time
+                              updated_at:
+                                type: string
+                                format: date-time
+                              title:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  name:
+                                    type: string
+                                    example: ''
+                                  department_id:
+                                    type: integer
+                                  position_id:
+                                    type: integer
+                                  level_id:
+                                    type: integer
+                                  created_at:
+                                    type: string
+                                    format: date-time
+                                    example: '0001-01-01T00:00:00Z'
+                                  updated_at:
+                                    type: string
+                                    format: date-time
+                                    example: '0001-01-01T00:00:00Z'
+                                  department:
+                                    type: object
+                                    nullable: true
+                                    example: null
+                                  position:
+                                    type: object
+                                    nullable: true
+                                    example: null
+                                  level:
+                                    type: object
+                                    nullable: true
+                                    example: null
+                              squads:
+                                type: object
+                                nullable: true
+                                example: null
+                              has_roles:
+                                type: object
+                                nullable: true
+                                example: null
+                  success:
+                    type: boolean
+    post:
+      tags:
+        - Roles
+      summary: Tambah peran
+      description: Menambahkan peran baru
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - user_has_roles
+              properties:
+                name:
+                  type: string
+                user_has_roles:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: Peran berhasil ditambahkan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                      has_permission:
+                        type: array
+                        nullable: true
+                        example: null
+                      has_user:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            title_id:
+                              type: integer
+                            name:
+                              type: string
+                              example: ''
+                            email:
+                              type: string
+                              example: ''
+                            email_verified_at:
+                              type: string
+                              format: date-time
+                              example: '0001-01-01T00:00:00Z'
+                            remember_token:
+                              type: string
+                              nullable: true
+                              example: null
+                            custom_fields:
+                              type: string
+                              example: ''
+                            avatar_url:
+                              type: string
+                              example: ''
+                            created_at:
+                              type: string
+                              format: date-time
+                              example: '0001-01-01T00:00:00Z'
+                            updated_at:
+                              type: string
+                              format: date-time
+                              example: '0001-01-01T00:00:00Z'
+                            title:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                name:
+                                  type: string
+                                  example: ''
+                                department_id:
+                                  type: integer
+                                position_id:
+                                  type: integer
+                                level_id:
+                                  type: integer
+                                created_at:
+                                  type: string
+                                  format: date-time
+                                  example: '0001-01-01T00:00:00Z'
+                                updated_at:
+                                  type: string
+                                  format: date-time
+                                  example: '0001-01-01T00:00:00Z'
+                                department:
+                                  type: object
+                                  nullable: true
+                                  example: null
+                                position:
+                                  type: object
+                                  nullable: true
+                                  example: null
+                                level:
+                                  type: object
+                                  nullable: true
+                                  example: null
+                            squads:
+                              type: object
+                              nullable: true
+                              example: null
+                            has_roles:
+                              type: object
+                              nullable: true
+                              example: null
+                  success:
+                    type: boolean
+        '400':
+          description: Permintaan tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  success:
+                    type: boolean
+                    example: false
+  '/roles/{id}':
+    put:
+      tags:
+        - Roles
+      summary: Update peran
+      description: Memperbarui informasi peran berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID peran
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - user_has_roles
+              properties:
+                name:
+                  type: string
+                user_has_roles:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: Peran berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                      has_permission:
+                        type: array
+                        nullable: true
+                        example: null
+                      has_user:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            title_id:
+                              type: integer
+                            name:
+                              type: string
+                            email:
+                              type: string
+                            email_verified_at:
+                              type: string
+                              format: date-time
+                            remember_token:
+                              type: string
+                              nullable: true
+                            custom_fields:
+                              type: string
+                            avatar_url:
+                              type: string
+                            created_at:
+                              type: string
+                              format: date-time
+                            updated_at:
+                              type: string
+                              format: date-time
+                            title:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                name:
+                                  type: string
+                                  example: ''
+                                department_id:
+                                  type: integer
+                                position_id:
+                                  type: integer
+                                level_id:
+                                  type: integer
+                                created_at:
+                                  type: string
+                                  format: date-time
+                                  example: '0001-01-01T00:00:00Z'
+                                updated_at:
+                                  type: string
+                                  format: date-time
+                                  example: '0001-01-01T00:00:00Z'
+                                department:
+                                  type: object
+                                  nullable: true
+                                  example: null
+                                position:
+                                  type: object
+                                  nullable: true
+                                  example: null
+                                level:
+                                  type: object
+                                  nullable: true
+                                  example: null
+                            squads:
+                              type: object
+                              nullable: true
+                              example: null
+                            has_roles:
+                              type: object
+                              nullable: true
+                              example: null
+                  success:
+                    type: boolean
+        '400':
+          description: Permintaan tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  success:
+                    type: boolean
+                    example: false
+    delete:
+      tags:
+        - Roles
+      summary: Hapus peran
+      description: Menghapus peran berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID peran
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Peran berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+                  message:
+                    type: string
+                    example: Role deleted successfully
+                  success:
+                    type: boolean
+        '400':
+          description: Permintaan tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
                   success:
                     type: boolean
                     example: false
