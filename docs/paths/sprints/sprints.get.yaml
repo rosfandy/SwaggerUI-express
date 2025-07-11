@@ -1,10 +1,16 @@
-# sprint.get.yaml
 tags:
   - Sprints
 security:
   - BearerAuth: []
 summary: Ambil semua sprint
-description: Mengembalikan data semua sprint beserta informasi departemen
+description: Mengembalikan data semua sprint, atau sprint berdasarkan `squad_id` jika disediakan.
+parameters:
+  - in: query
+    name: squad_id
+    required: false
+    schema:
+      type: integer
+    description: Filter sprint berdasarkan ID squad (opsional)
 responses:
   "200":
     description: Berhasil
@@ -13,59 +19,17 @@ responses:
         schema:
           type: object
           properties:
-            data:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    example: 1
-                  name:
-                    type: string
-                    example: "Sprint 1"
-                  code:
-                    type: string
-                    example: "spr-001"
-                  start_date:
-                    type: string
-                    format: date-time
-                    example: "2025-07-04T13:51:51.901876+07:00"
-                  end_date:
-                    type: string
-                    format: date-time
-                    example: "2025-08-04T13:51:51.901876+07:00"
-                  squad_id:
-                    type: integer
-                    example: 1
-                  created_at:
-                    type: string
-                    format: date-time
-                    example: "2025-07-04T13:51:51.901876+07:00"
-                  updated_at:
-                    type: string
-                    format: date-time
-                    example: "2025-07-04T13:53:29.343153+07:00"
-                  has_squad:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        example: 1
-                      name:
-                        type: string
-                        example: "squad 1"
-                      created_at:
-                        type: string
-                        format: date-time
-                        example: "2025-07-04T13:52:49.041189+07:00"
-                      updated_at:
-                        type: string
-                        format: date-time
-                        example: "2025-07-04T13:52:49.041769+07:00"
             success:
               type: boolean
               example: true
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Sprint'
+  "400":
+    description: Request tidak valid
+  "500":
+    description: Terjadi kesalahan server
 components:
   schemas:
     SprintRequest:
@@ -82,7 +46,7 @@ components:
           example: Sprint 1
         code:
           type: string
-          example: spr-001
+          example: SPR-20250711001
         start_date:
           type: string
           format: date
@@ -106,7 +70,7 @@ components:
           example: Sprint 1
         code:
           type: string
-          example: spr-001
+          example: SPR-20250711001
         start_date:
           type: string
           format: date

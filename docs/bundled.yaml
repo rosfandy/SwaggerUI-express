@@ -1587,3 +1587,871 @@ paths:
                   success:
                     type: boolean
                     example: false
+  /sprints:
+    get:
+      tags:
+        - Sprints
+      security:
+        - BearerAuth: []
+      summary: Ambil semua sprint
+      description: 'Mengembalikan data semua sprint, atau sprint berdasarkan `squad_id` jika disediakan.'
+      parameters:
+        - in: query
+          name: squad_id
+          required: false
+          schema:
+            type: integer
+          description: Filter sprint berdasarkan ID squad (opsional)
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1sprints/get/components/schemas/Sprint'
+        '400':
+          description: Request tidak valid
+        '500':
+          description: Terjadi kesalahan server
+      components:
+        schemas:
+          SprintRequest:
+            type: object
+            required:
+              - name
+              - code
+              - start_date
+              - end_date
+              - squad_id
+            properties:
+              name:
+                type: string
+                example: Sprint 1
+              code:
+                type: string
+                example: SPR-20250711001
+              start_date:
+                type: string
+                format: date
+                example: '2025-07-01'
+              end_date:
+                type: string
+                format: date
+                example: '2025-07-14'
+              squad_id:
+                type: integer
+                example: 1
+          Sprint:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 5
+              name:
+                type: string
+                example: Sprint 1
+              code:
+                type: string
+                example: SPR-20250711001
+              start_date:
+                type: string
+                format: date
+                example: '2025-07-01'
+              end_date:
+                type: string
+                format: date
+                example: '2025-07-14'
+              squad_id:
+                type: integer
+                example: 1
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T10:00:00+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T10:30:00+07:00'
+              has_squad:
+                $ref: '#/paths/~1sprints/get/components/schemas/Squad'
+          Squad:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: Squad 1
+    post:
+      tags:
+        - Sprints
+      security:
+        - BearerAuth: []
+      summary: Tambah sprint
+      description: Menambahkan sprint baru
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1sprints/post/components/schemas/SprintRequest'
+      responses:
+        '201':
+          description: Sprint berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1sprints/post/components/schemas/Sprint'
+                  success:
+                    type: boolean
+                    example: true
+        '400':
+          description: Validasi gagal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Validasi gagal
+                  success:
+                    type: boolean
+                    example: false
+      components:
+        schemas:
+          SprintRequest:
+            type: object
+            required:
+              - name
+              - code
+              - start_date
+              - end_date
+              - squad_id
+            properties:
+              name:
+                type: string
+                example: Sprint 1
+              code:
+                type: string
+                example: spr-001
+              start_date:
+                type: string
+                format: date
+                example: '2025-07-01'
+              end_date:
+                type: string
+                format: date
+                example: '2025-07-14'
+              squad_id:
+                type: integer
+                example: 1
+          Sprint:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 5
+              name:
+                type: string
+                example: Sprint 1
+              code:
+                type: string
+                example: spr-001
+              start_date:
+                type: string
+                format: date
+                example: '2025-07-01'
+              end_date:
+                type: string
+                format: date
+                example: '2025-07-14'
+              squad_id:
+                type: integer
+                example: 1
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T10:00:00+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T10:30:00+07:00'
+              has_squad:
+                $ref: '#/paths/~1sprints/post/components/schemas/Squad'
+          Squad:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: Squad 1
+  '/sprints/{id}':
+    put:
+      tags:
+        - Sprints
+      security:
+        - BearerAuth: []
+      summary: Ubah sprint
+      description: Mengubah data sprint berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID sprint yang ingin diubah
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1sprints~1%7Bid%7D/put/components/schemas/SprintRequest'
+      responses:
+        '200':
+          description: Sprint berhasil diubah
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1sprints~1%7Bid%7D/put/components/schemas/Sprint'
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          description: Sprint tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false
+      components:
+        schemas:
+          SprintRequest:
+            type: object
+            required:
+              - name
+              - code
+              - start_date
+              - end_date
+              - squad_id
+            properties:
+              name:
+                type: string
+                example: Sprint 1
+              code:
+                type: string
+                example: spr-001
+              start_date:
+                type: string
+                format: date
+                example: '2025-07-01'
+              end_date:
+                type: string
+                format: date
+                example: '2025-07-14'
+              squad_id:
+                type: integer
+                example: 1
+          Sprint:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 5
+              name:
+                type: string
+                example: Sprint 1
+              code:
+                type: string
+                example: spr-001
+              start_date:
+                type: string
+                format: date
+                example: '2025-07-01'
+              end_date:
+                type: string
+                format: date
+                example: '2025-07-14'
+              squad_id:
+                type: integer
+                example: 1
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T10:00:00+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T10:30:00+07:00'
+              has_squad:
+                $ref: '#/paths/~1sprints~1%7Bid%7D/put/components/schemas/Squad'
+          Squad:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: Squad 1
+    delete:
+      tags:
+        - Sprints
+      security:
+        - BearerAuth: []
+      summary: Hapus sprint
+      description: Menghapus sprint berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID sprint yang ingin dihapus
+      responses:
+        '200':
+          description: Sprint berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: 'null'
+                    example: null
+                  message:
+                    type: string
+                    example: Sprint deleted successfully
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          description: Sprint tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Sprint tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false
+  /statuses:
+    get:
+      tags:
+        - Statuses
+      summary: Ambil semua status
+      description: Mengembalikan data semua status beserta informasi posisi terkait
+      responses:
+        '200':
+          description: Berhasil mengambil data status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statuses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: ID status
+                          example: 14
+                        name:
+                          type: string
+                          description: Nama status
+                          example: Work in Pressure
+                        category:
+                          type: string
+                          description: Kategori status
+                          enum:
+                            - To-Do
+                            - In Progress
+                            - Complete
+                          example: Complete
+                        position_id:
+                          type: integer
+                          description: ID posisi
+                          example: 4
+                        index:
+                          type: integer
+                          description: Urutan index status
+                          example: 2
+                        color:
+                          type: string
+                          description: Warna status dalam format hex
+                          example: '#c12020'
+                        is_default:
+                          type: boolean
+                          description: Apakah status ini default
+                          example: false
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: Waktu dibuat
+                          example: '2025-07-08T13:29:56.142755+07:00'
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: Waktu diupdate
+                          example: '2025-07-08T14:54:26.604999+07:00'
+                        has_position:
+                          type: object
+                          description: Informasi posisi terkait
+                          properties:
+                            id:
+                              type: integer
+                              description: ID posisi
+                              example: 4
+                            name:
+                              type: string
+                              description: Nama posisi
+                              example: Production
+                            department_id:
+                              type: integer
+                              description: ID departemen
+                              example: 2
+                            created_at:
+                              type: string
+                              format: date-time
+                              description: Waktu dibuat
+                              example: '2025-07-04T14:13:08.292943+07:00'
+                            updated_at:
+                              type: string
+                              format: date-time
+                              description: Waktu diupdate
+                              example: '2025-07-08T14:55:27.915399+07:00'
+                            titles:
+                              type: object
+                              nullable: true
+                              description: Data titles terkait
+                              example: null
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Internal server error
+    post:
+      tags:
+        - Statuses
+      summary: Buat status baru
+      description: Membuat status baru dengan data yang diberikan
+      requestBody:
+        description: Data status baru
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nama status
+                  example: Work in Pressure
+                category:
+                  type: string
+                  description: Kategori status
+                  enum:
+                    - To-Do
+                    - In Progress
+                    - Complete
+                  example: Complete
+                position_id:
+                  type: integer
+                  description: ID posisi yang terkait
+                  example: 4
+                index:
+                  type: integer
+                  description: Urutan index status
+                  example: 2
+                color:
+                  type: string
+                  description: Warna status dalam format hex
+                  pattern: '^#[0-9A-Fa-f]{6}$'
+                  example: '#c12020'
+              required:
+                - name
+                - category
+                - position_id
+                - index
+                - color
+      responses:
+        '201':
+          description: Berhasil membuat status baru
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID status yang baru dibuat
+                        example: 14
+                      name:
+                        type: string
+                        description: Nama status
+                        example: Work in Pressure
+                      category:
+                        type: string
+                        description: Kategori status
+                        example: Complete
+                      position_id:
+                        type: integer
+                        description: ID posisi
+                        example: 4
+                      index:
+                        type: integer
+                        description: Urutan index status
+                        example: 2
+                      color:
+                        type: string
+                        description: Warna status dalam format hex
+                        example: '#c12020'
+                      is_default:
+                        type: boolean
+                        description: Apakah status ini default
+                        example: false
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Waktu dibuat
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Waktu diupdate
+                  message:
+                    type: string
+                    description: Pesan sukses
+                    example: Status berhasil dibuat
+        '400':
+          description: Bad request - Data tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Field 'name' is required
+                  details:
+                    type: object
+                    description: Detail error validasi
+        '422':
+          description: Unprocessable Entity - Validasi gagal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Validation failed
+                  details:
+                    type: array
+                    items:
+                      type: string
+                    description: Detail error validasi
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Internal server error
+  '/statuses/{id}':
+    put:
+      tags:
+        - Statuses
+      summary: Update status
+      description: Mengupdate data status berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID status yang akan diupdate
+          schema:
+            type: integer
+            example: 14
+      requestBody:
+        description: Data status yang akan diupdate
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nama status
+                  example: Work in Pressure Updated
+                category:
+                  type: string
+                  description: Kategori status
+                  enum:
+                    - To-Do
+                    - In Progress
+                    - Complete
+                  example: In Progress
+                position_id:
+                  type: integer
+                  description: ID posisi yang terkait
+                  example: 4
+                index:
+                  type: integer
+                  description: Urutan index status
+                  example: 3
+                color:
+                  type: string
+                  description: Warna status dalam format hex
+                  pattern: '^#[0-9A-Fa-f]{6}$'
+                  example: '#c12020'
+              required:
+                - name
+                - category
+                - position_id
+                - index
+                - color
+      responses:
+        '200':
+          description: Berhasil mengupdate status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID status
+                        example: 14
+                      name:
+                        type: string
+                        description: Nama status
+                        example: Work in Pressure Updated
+                      category:
+                        type: string
+                        description: Kategori status
+                        example: In Progress
+                      position_id:
+                        type: integer
+                        description: ID posisi
+                        example: 4
+                      index:
+                        type: integer
+                        description: Urutan index status
+                        example: 3
+                      color:
+                        type: string
+                        description: Warna status dalam format hex
+                        example: '#c12020'
+                      is_default:
+                        type: boolean
+                        description: Apakah status ini default
+                        example: false
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Waktu dibuat
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Waktu diupdate
+                  message:
+                    type: string
+                    description: Pesan sukses
+                    example: Status berhasil diupdate
+        '400':
+          description: Bad request - Data tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Field 'name' is required
+                  details:
+                    type: object
+                    description: Detail error validasi
+        '404':
+          description: Status tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Status with ID 14 not found
+        '422':
+          description: Unprocessable Entity - Validasi gagal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Validation failed
+                  details:
+                    type: array
+                    items:
+                      type: string
+                    description: Detail error validasi
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Internal server error
+    delete:
+      tags:
+        - Statuses
+      summary: Hapus status
+      description: Menghapus status berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID status yang akan dihapus
+          schema:
+            type: integer
+            example: 14
+      responses:
+        '200':
+          description: Berhasil menghapus status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID status yang dihapus
+                        example: 14
+                      name:
+                        type: string
+                        description: Nama status yang dihapus
+                        example: Work in Pressure
+                      category:
+                        type: string
+                        description: Kategori status
+                        example: Complete
+                      position_id:
+                        type: integer
+                        description: ID posisi
+                        example: 4
+                      index:
+                        type: integer
+                        description: Urutan index status
+                        example: 2
+                      color:
+                        type: string
+                        description: Warna status dalam format hex
+                        example: '#c12020'
+                      is_default:
+                        type: boolean
+                        description: Apakah status ini default
+                        example: false
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Waktu dibuat
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Waktu diupdate
+                  message:
+                    type: string
+                    description: Pesan sukses
+                    example: Status berhasil dihapus
+        '404':
+          description: Status tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Status with ID 14 not found
+        '409':
+          description: Conflict - Status tidak dapat dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Cannot delete status because it is being used
+                  details:
+                    type: string
+                    description: Detail error
+                    example: This status is referenced by existing tasks
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Internal server error
