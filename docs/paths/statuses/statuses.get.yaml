@@ -1,0 +1,98 @@
+tags:
+  - Statuses
+summary: Ambil semua status
+description: Mengembalikan data semua status beserta informasi posisi terkait
+responses:
+  "200":
+    description: Berhasil mengambil data status
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            statuses:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID status
+                    example: 14
+                  name:
+                    type: string
+                    description: Nama status
+                    example: "Work in Pressure"
+                  category:
+                    type: string
+                    description: Kategori status
+                    enum: ["To-Do", "In Progress", "Complete"]
+                    example: "Complete"
+                  position_id:
+                    type: integer
+                    description: ID posisi
+                    example: 4
+                  index:
+                    type: integer
+                    description: Urutan index status
+                    example: 2
+                  color:
+                    type: string
+                    description: Warna status dalam format hex
+                    example: "#c12020"
+                  is_default:
+                    type: boolean
+                    description: Apakah status ini default
+                    example: false
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Waktu dibuat
+                    example: "2025-07-08T13:29:56.142755+07:00"
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Waktu diupdate
+                    example: "2025-07-08T14:54:26.604999+07:00"
+                  has_position:
+                    type: object
+                    description: Informasi posisi terkait
+                    properties:
+                      id:
+                        type: integer
+                        description: ID posisi
+                        example: 4
+                      name:
+                        type: string
+                        description: Nama posisi
+                        example: "Production"
+                      department_id:
+                        type: integer
+                        description: ID departemen
+                        example: 2
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Waktu dibuat
+                        example: "2025-07-04T14:13:08.292943+07:00"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Waktu diupdate
+                        example: "2025-07-08T14:55:27.915399+07:00"
+                      titles:
+                        type: object
+                        nullable: true
+                        description: Data titles terkait
+                        example: null
+  "500":
+    description: Server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              description: Pesan error
+              example: "Internal server error"

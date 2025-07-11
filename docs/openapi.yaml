@@ -82,3 +82,13 @@ paths:
       $ref: ./paths/holidays/holidays.put.yaml
     delete:
       $ref: ./paths/holidays/holidays.delete.yaml
+  /statuses:
+    get:
+      $ref: ./paths/statuses/statuses.get.yaml
+    post:
+      $ref: ./paths/statuses/statuses.post.yaml
+  /statuses/{id}:
+    put:
+      $ref: ./paths/statuses/statuses.put.yaml
+    delete:
+      $ref: ./paths/statuses/statuses.delete.yaml

@@ -1579,3 +1579,505 @@ paths:
                   success:
                     type: boolean
                     example: false
+  /statuses:
+    get:
+      tags:
+        - Statuses
+      summary: Ambil semua status
+      description: Mengembalikan data semua status beserta informasi posisi terkait
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Berhasil mengambil data status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statuses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: ID status
+                          example: 14
+                        name:
+                          type: string
+                          description: Nama status
+                          example: Work in Pressure
+                        category:
+                          type: string
+                          description: Kategori status
+                          enum:
+                            - To-Do
+                            - In Progress
+                            - Complete
+                          example: Complete
+                        position_id:
+                          type: integer
+                          description: ID posisi
+                          example: 4
+                        index:
+                          type: integer
+                          description: Urutan index status
+                          example: 2
+                        color:
+                          type: string
+                          description: Warna status dalam format hex
+                          example: '#c12020'
+                        is_default:
+                          type: boolean
+                          description: Apakah status ini default
+                          example: false
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: Waktu dibuat
+                          example: '2025-07-08T13:29:56.142755+07:00'
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: Waktu diupdate
+                          example: '2025-07-08T14:54:26.604999+07:00'
+                        has_position:
+                          type: object
+                          description: Informasi posisi terkait
+                          properties:
+                            id:
+                              type: integer
+                              description: ID posisi
+                              example: 4
+                            name:
+                              type: string
+                              description: Nama posisi
+                              example: Production
+                            department_id:
+                              type: integer
+                              description: ID departemen
+                              example: 2
+                            created_at:
+                              type: string
+                              format: date-time
+                              description: Waktu dibuat
+                              example: '2025-07-04T14:13:08.292943+07:00'
+                            updated_at:
+                              type: string
+                              format: date-time
+                              description: Waktu diupdate
+                              example: '2025-07-08T14:55:27.915399+07:00'
+                            titles:
+                              type: object
+                              nullable: true
+                              description: Data titles terkait
+                              example: null
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Internal server error
+    post:
+      tags:
+        - Statuses
+      summary: Buat status baru
+      description: Membuat status baru dengan data yang diberikan
+      security:
+        - BearerAuth: []
+      requestBody:
+        description: Data status baru
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nama status
+                  example: Work in Pressure
+                category:
+                  type: string
+                  description: Kategori status
+                  enum:
+                    - To-Do
+                    - In Progress
+                    - Complete
+                  example: Complete
+                position_id:
+                  type: integer
+                  description: ID posisi yang terkait
+                  example: 4
+                index:
+                  type: integer
+                  description: Urutan index status
+                  example: 2
+                color:
+                  type: string
+                  description: Warna status dalam format hex
+                  pattern: '^#[0-9A-Fa-f]{6}$'
+                  example: '#c12020'
+              required:
+                - name
+                - category
+                - position_id
+                - index
+                - color
+      responses:
+        '201':
+          description: Berhasil membuat status baru
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID status yang baru dibuat
+                        example: 14
+                      name:
+                        type: string
+                        description: Nama status
+                        example: Work in Pressure
+                      category:
+                        type: string
+                        description: Kategori status
+                        example: Complete
+                      position_id:
+                        type: integer
+                        description: ID posisi
+                        example: 4
+                      index:
+                        type: integer
+                        description: Urutan index status
+                        example: 2
+                      color:
+                        type: string
+                        description: Warna status dalam format hex
+                        example: '#c12020'
+                      is_default:
+                        type: boolean
+                        description: Apakah status ini default
+                        example: false
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Waktu dibuat
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Waktu diupdate
+                  message:
+                    type: string
+                    description: Pesan sukses
+                    example: Status berhasil dibuat
+        '400':
+          description: Bad request - Data tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Field 'name' is required
+                  details:
+                    type: object
+                    description: Detail error validasi
+        '422':
+          description: Unprocessable Entity - Validasi gagal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Validation failed
+                  details:
+                    type: array
+                    items:
+                      type: string
+                    description: Detail error validasi
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Internal server error
+  '/statuses/{id}':
+    put:
+      tags:
+        - Statuses
+      summary: Update status
+      description: Mengupdate data status berdasarkan ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID status yang akan diupdate
+          schema:
+            type: integer
+            example: 14
+      requestBody:
+        description: Data status yang akan diupdate
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nama status
+                  example: Work in Pressure Updated
+                category:
+                  type: string
+                  description: Kategori status
+                  enum:
+                    - To-Do
+                    - In Progress
+                    - Complete
+                  example: In Progress
+                position_id:
+                  type: integer
+                  description: ID posisi yang terkait
+                  example: 4
+                index:
+                  type: integer
+                  description: Urutan index status
+                  example: 3
+                color:
+                  type: string
+                  description: Warna status dalam format hex
+                  pattern: '^#[0-9A-Fa-f]{6}$'
+                  example: '#c12020'
+              required:
+                - name
+                - category
+                - position_id
+                - index
+                - color
+      responses:
+        '200':
+          description: Berhasil mengupdate status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID status
+                        example: 14
+                      name:
+                        type: string
+                        description: Nama status
+                        example: Work in Pressure Updated
+                      category:
+                        type: string
+                        description: Kategori status
+                        example: In Progress
+                      position_id:
+                        type: integer
+                        description: ID posisi
+                        example: 4
+                      index:
+                        type: integer
+                        description: Urutan index status
+                        example: 3
+                      color:
+                        type: string
+                        description: Warna status dalam format hex
+                        example: '#c12020'
+                      is_default:
+                        type: boolean
+                        description: Apakah status ini default
+                        example: false
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Waktu dibuat
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Waktu diupdate
+                  message:
+                    type: string
+                    description: Pesan sukses
+                    example: Status berhasil diupdate
+        '400':
+          description: Bad request - Data tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Field 'name' is required
+                  details:
+                    type: object
+                    description: Detail error validasi
+        '404':
+          description: Status tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Status with ID 14 not found
+        '422':
+          description: Unprocessable Entity - Validasi gagal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Validation failed
+                  details:
+                    type: array
+                    items:
+                      type: string
+                    description: Detail error validasi
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Internal server error
+    delete:
+      tags:
+        - Statuses
+      summary: Hapus status
+      description: Menghapus status berdasarkan ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID status yang akan dihapus
+          schema:
+            type: integer
+            example: 14
+      responses:
+        '200':
+          description: Berhasil menghapus status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID status yang dihapus
+                        example: 14
+                      name:
+                        type: string
+                        description: Nama status yang dihapus
+                        example: Work in Pressure
+                      category:
+                        type: string
+                        description: Kategori status
+                        example: Complete
+                      position_id:
+                        type: integer
+                        description: ID posisi
+                        example: 4
+                      index:
+                        type: integer
+                        description: Urutan index status
+                        example: 2
+                      color:
+                        type: string
+                        description: Warna status dalam format hex
+                        example: '#c12020'
+                      is_default:
+                        type: boolean
+                        description: Apakah status ini default
+                        example: false
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Waktu dibuat
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Waktu diupdate
+                  message:
+                    type: string
+                    description: Pesan sukses
+                    example: Status berhasil dihapus
+        '404':
+          description: Status tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Status with ID 14 not found
+        '409':
+          description: Conflict - Status tidak dapat dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Cannot delete status because it is being used
+                  details:
+                    type: string
+                    description: Detail error
+                    example: This status is referenced by existing tasks
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Pesan error
+                    example: Internal server error
