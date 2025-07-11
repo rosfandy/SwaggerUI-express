@@ -1,6 +1,8 @@
 # titles.post.yaml
 tags:
   - Titles
+security:
+  - BearerAuth: []
 summary: Buat title baru
 description: Membuat title baru dengan data yang diberikan
 requestBody:

@@ -1,0 +1,140 @@
+# sprint.get.yaml
+tags:
+  - Sprints
+security:
+  - BearerAuth: []
+summary: Ambil semua sprint
+description: Mengembalikan data semua sprint beserta informasi departemen
+responses:
+  "200":
+    description: Berhasil
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "Sprint 1"
+                  code:
+                    type: string
+                    example: "spr-001"
+                  start_date:
+                    type: string
+                    format: date-time
+                    example: "2025-07-04T13:51:51.901876+07:00"
+                  end_date:
+                    type: string
+                    format: date-time
+                    example: "2025-08-04T13:51:51.901876+07:00"
+                  squad_id:
+                    type: integer
+                    example: 1
+                  created_at:
+                    type: string
+                    format: date-time
+                    example: "2025-07-04T13:51:51.901876+07:00"
+                  updated_at:
+                    type: string
+                    format: date-time
+                    example: "2025-07-04T13:53:29.343153+07:00"
+                  has_squad:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: "squad 1"
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2025-07-04T13:52:49.041189+07:00"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2025-07-04T13:52:49.041769+07:00"
+            success:
+              type: boolean
+              example: true
+components:
+  schemas:
+    SprintRequest:
+      type: object
+      required:
+        - name
+        - code
+        - start_date
+        - end_date
+        - squad_id
+      properties:
+        name:
+          type: string
+          example: Sprint 1
+        code:
+          type: string
+          example: spr-001
+        start_date:
+          type: string
+          format: date
+          example: "2025-07-01"
+        end_date:
+          type: string
+          format: date
+          example: "2025-07-14"
+        squad_id:
+          type: integer
+          example: 1
+
+    Sprint:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 5
+        name:
+          type: string
+          example: Sprint 1
+        code:
+          type: string
+          example: spr-001
+        start_date:
+          type: string
+          format: date
+          example: "2025-07-01"
+        end_date:
+          type: string
+          format: date
+          example: "2025-07-14"
+        squad_id:
+          type: integer
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T10:00:00+07:00"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T10:30:00+07:00"
+        has_squad:
+          $ref: '#/components/schemas/Squad'
+
+    Squad:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Squad 1

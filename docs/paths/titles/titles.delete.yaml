@@ -1,6 +1,8 @@
 # titles.delete.yaml
 tags:
   - Titles
+security:
+  - BearerAuth: []
 summary: Hapus title
 description: Menghapus title berdasarkan ID
 parameters:

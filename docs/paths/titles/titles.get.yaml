@@ -1,5 +1,7 @@
 tags:
   - Titles
+security:
+  - BearerAuth: []
 summary: Ambil semua title
 description: Mengembalikan data semua title
 responses:
