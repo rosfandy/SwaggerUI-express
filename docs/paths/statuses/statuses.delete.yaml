@@ -1,0 +1,100 @@
+tags:
+  - Statuses
+summary: Hapus status
+description: Menghapus status berdasarkan ID
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: ID status yang akan dihapus
+    schema:
+      type: integer
+      example: 14
+responses:
+  "200":
+    description: Berhasil menghapus status
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: ID status yang dihapus
+                  example: 14
+                name:
+                  type: string
+                  description: Nama status yang dihapus
+                  example: "Work in Pressure"
+                category:
+                  type: string
+                  description: Kategori status
+                  example: "Complete"
+                position_id:
+                  type: integer
+                  description: ID posisi
+                  example: 4
+                index:
+                  type: integer
+                  description: Urutan index status
+                  example: 2
+                color:
+                  type: string
+                  description: Warna status dalam format hex
+                  example: "#c12020"
+                is_default:
+                  type: boolean
+                  description: Apakah status ini default
+                  example: false
+                created_at:
+                  type: string
+                  format: date-time
+                  description: Waktu dibuat
+                updated_at:
+                  type: string
+                  format: date-time
+                  description: Waktu diupdate
+            message:
+              type: string
+              description: Pesan sukses
+              example: "Status berhasil dihapus"
+  "404":
+    description: Status tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              description: Pesan error
+              example: "Status with ID 14 not found"
+  "409":
+    description: Conflict - Status tidak dapat dihapus
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              description: Pesan error
+              example: "Cannot delete status because it is being used"
+            details:
+              type: string
+              description: Detail error
+              example: "This status is referenced by existing tasks"
+  "500":
+    description: Server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              description: Pesan error
+              example: "Internal server error"

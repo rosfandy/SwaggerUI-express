@@ -93,3 +93,13 @@ paths:
       $ref: ./paths/backlog_items/backlog_items.put.yaml
     delete:
       $ref: ./paths/backlog_items/backlog_items.delete.yaml
+  /statuses:
+    get:
+      $ref: ./paths/statuses/statuses.get.yaml
+    post:
+      $ref: ./paths/statuses/statuses.post.yaml
+  /statuses/{id}:
+    put:
+      $ref: ./paths/statuses/statuses.put.yaml
+    delete:
+      $ref: ./paths/statuses/statuses.delete.yaml
