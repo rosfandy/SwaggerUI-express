@@ -13,6 +13,7 @@ components:
       bearerFormat: JWT
 servers:
   - url: http://127.0.0.1:5000/api/v1
+  - url: http://127.0.0.1:5123/api/v1
   - url: https://jk-go-52014148654.asia-southeast2.run.app/api/v1
 paths:
   /hello:
@@ -82,3 +83,13 @@ paths:
       $ref: ./paths/holidays/holidays.put.yaml
     delete:
       $ref: ./paths/holidays/holidays.delete.yaml
+  /backlog_items:
+    get:
+      $ref: ./paths/backlog_items/backlog_items.get.yaml
+    post:
+      $ref: ./paths/backlog_items/backlog_items.post.yaml
+  /backlog_items/{id}:
+    put:
+      $ref: ./paths/backlog_items/backlog_items.put.yaml
+    delete:
+      $ref: ./paths/backlog_items/backlog_items.delete.yaml

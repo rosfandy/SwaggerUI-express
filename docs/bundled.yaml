@@ -13,6 +13,7 @@ components:
       bearerFormat: JWT
 servers:
   - url: 'http://127.0.0.1:5000/api/v1'
+  - url: 'http://127.0.0.1:5123/api/v1'
   - url: 'https://jk-go-52014148654.asia-southeast2.run.app/api/v1'
 paths:
   /hello:
@@ -1568,6 +1569,342 @@ paths:
                     example: true
         '404':
           description: Hari libur tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false
+  /backlog_items:
+    get:
+      tags:
+        - backlog_items
+      summary: Ambil semua backlog items
+      description: Mengembalikan data semua backlog items
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1backlog_items/get/components/schemas/BacklogItem'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          BacklogItem:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: Backlog Item 1
+              user_id:
+                type: integer
+                example: 17
+              estimate:
+                type: integer
+                example: 5
+              start_date:
+                type: string
+                format: date
+                example: 01-01-2025
+              end_date:
+                type: string
+                format: date
+                example: 01-02-2025
+              priority:
+                type: string
+                example: High
+              description:
+                type: string
+                example: This is a backlog item description.
+              statuse_id:
+                type: integer
+                example: 1
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-01-01T10:00:00Z'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-01-02T10:00:00Z'
+    post:
+      tags:
+        - backlog_items
+      summary: Tambah backlog item
+      description: Menambahkan backlog item baru
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - user_id
+                - estimate
+                - start_date
+                - end_date
+                - priority
+                - description
+                - statuse_id
+              properties:
+                name:
+                  type: string
+                  example: backlog item 1
+                user_id:
+                  type: integer
+                  example: 17
+                estimate:
+                  type: integer
+                  example: 5
+                start_date:
+                  type: string
+                  example: 01-01-2025
+                end_date:
+                  type: string
+                  example: 01-02-2025
+                priority:
+                  type: string
+                  example: High
+                description:
+                  type: string
+                  example: backlog item 1 created
+                statuse_id:
+                  type: integer
+                  example: 1
+      responses:
+        '201':
+          description: Backlog item berhasil ditambahkan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1backlog_items/post/components/schemas/BacklogItem'
+                  success:
+                    type: boolean
+                    example: true
+      components:
+        schemas:
+          BacklogItem:
+            title: BacklogItem
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 2
+              name:
+                type: string
+                example: backlog item 1
+              user_id:
+                type: integer
+                example: 17
+              estimate:
+                type: integer
+                example: 5
+              start_date:
+                type: string
+                example: 01-01-2025
+              end_date:
+                type: string
+                example: 01-02-2025
+              priority:
+                type: string
+                example: High
+              description:
+                type: string
+                example: backlog item 1 created
+              statuse_id:
+                type: integer
+                example: 1
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:20:27.879181+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:20:27.879181+07:00'
+  '/backlog_items/{id}':
+    put:
+      tags:
+        - backlog_items
+      summary: Update backlog item
+      description: Memperbarui data backlog item
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - backlog_id
+                - name
+                - user_id
+                - estimate
+                - start_date
+                - end_date
+                - priority
+                - description
+                - statuse_id
+              properties:
+                backlog_id:
+                  type: integer
+                  example: 1
+                name:
+                  type: string
+                  example: Backlog Item 1 Updated
+                user_id:
+                  type: integer
+                  example: 17
+                estimate:
+                  type: integer
+                  example: 5
+                start_date:
+                  type: string
+                  format: date
+                  example: 01-01-2025
+                end_date:
+                  type: string
+                  format: date
+                  example: 01-03-2025
+                priority:
+                  type: string
+                  example: High
+                description:
+                  type: string
+                  example: This is an updated backlog item description.
+                statuse_id:
+                  type: integer
+                  example: 1
+      responses:
+        '200':
+          description: Backlog item berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1backlog_items~1%7Bid%7D/put/components/schemas/BacklogItem'
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          description: Backlog item tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data tidak ditemukan
+                  success:
+                    type: boolean
+                    example: false
+      components:
+        schemas:
+          BacklogItem:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              backlog_id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: Backlog Item 1 Updated
+              user_id:
+                type: integer
+                example: 17
+              estimate:
+                type: integer
+                example: 5
+              start_date:
+                type: string
+                format: date
+                example: 01-01-2025
+              end_date:
+                type: string
+                format: date
+                example: 01-03-2025
+              priority:
+                type: string
+                example: High
+              description:
+                type: string
+                example: This is an updated backlog item description.
+              statuse_id:
+                type: integer
+                example: 1
+              created_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:20:27.879181+07:00'
+              updated_at:
+                type: string
+                format: date-time
+                example: '2025-07-04T16:20:27.879181+07:00'
+    delete:
+      tags:
+        - backlog_items
+      summary: Hapus backlog item
+      description: Menghapus backlog item berdasarkan ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            description: ID backlog item yang ingin dihapus
+      responses:
+        '200':
+          description: Backlog item berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    nullable: true
+                    type: object
+                    example: null
+                  message:
+                    type: string
+                    example: Backlog item berhasil dihapus
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          description: Backlog item tidak ditemukan
           content:
             application/json:
               schema:

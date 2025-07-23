@@ -1,0 +1,124 @@
+# backlog_items.put.yaml
+tags:
+  - backlog_items
+summary: Update backlog item
+description: Memperbarui data backlog item
+security:
+  - BearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - backlog_id
+          - name
+          - user_id     
+          - estimate
+          - start_date  
+          - end_date
+          - priority
+          - description
+          - statuse_id
+        properties:
+          backlog_id: 
+            type: integer
+            example: 1
+          name:
+            type: string
+            example: "Backlog Item 1 Updated"
+          user_id:
+            type: integer
+            example: 17
+          estimate:
+            type: integer
+            example: 5
+          start_date:
+            type: string
+            format: date
+            example: "01-01-2025"
+          end_date:
+            type: string
+            format: date
+            example: "01-03-2025"
+          priority:
+            type: string
+            example: "High"
+          description:  
+            type: string
+            example: "This is an updated backlog item description."
+          statuse_id:
+            type: integer 
+            example: 1
+responses:
+  "200":
+    description: Backlog item berhasil diperbarui
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/BacklogItem'
+            success:
+              type: boolean
+              example: true
+  "404":
+    description: Backlog item tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object    
+          properties:
+            error:
+              type: string
+              example: "Data tidak ditemukan"
+            success:
+              type: boolean
+              example: false
+components:
+  schemas:  
+    BacklogItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        backlog_id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Backlog Item 1 Updated"
+        user_id:
+          type: integer
+          example: 17
+        estimate:
+          type: integer
+          example: 5
+        start_date:
+          type: string
+          format: date
+          example: "01-01-2025"
+        end_date:
+          type: string
+          format: date
+          example: "01-03-2025"
+        priority:
+          type: string
+          example: "High"
+        description:
+          type: string
+          example: "This is an updated backlog item description."
+        statuse_id:
+          type: integer
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:20:27.879181+07:00"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:20:27.879181+07:00"
