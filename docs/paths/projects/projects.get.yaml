@@ -52,7 +52,7 @@ responses:
                         updated_at:
                           type: string
                           format: date-time
-                        SquadMembers:
+                        users:
                           type: array
                           items:
                             type: object
@@ -68,8 +68,6 @@ responses:
                               email_verified_at:
                                 type: string
                                 format: date-time
-                              password:
-                                type: string
                               remember_token:
                                 type: string
                                 nullable: true
@@ -83,11 +81,49 @@ responses:
                               updated_at:
                                 type: string
                                 format: date-time
-                              Squads:
+                              title:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  name:
+                                    type: string
+                                    example: ""
+                                  department_id:
+                                    type: integer
+                                  position_id:
+                                    type: integer
+                                  level_id:
+                                    type: integer
+                                  created_at:
+                                    type: string
+                                    format: date-time
+                                    example: "0001-01-01T00:00:00Z"
+                                  updated_at:
+                                    type: string
+                                    format: date-time
+                                    example: "0001-01-01T00:00:00Z"
+                                  department:
+                                    type: object
+                                    nullable: true
+                                    example: null
+                                  position:
+                                    type: object
+                                    nullable: true
+                                    example: null
+                                  level:
+                                    type: object
+                                    nullable: true
+                                    example: null
+                              squads:
                                 type: object
                                 nullable: true
                                 example: null
-                        has_project:
+                              has_roles:
+                                type: object
+                                nullable: true
+                                example: null
+                        projects:
                           type: object
                           nullable: true
                           example: null

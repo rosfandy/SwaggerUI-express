@@ -115,3 +115,13 @@ paths:
       $ref: ./paths/statuses/statuses.put.yaml
     delete:
       $ref: ./paths/statuses/statuses.delete.yaml
+  /roles:
+    get:
+      $ref: ./paths/roles/roles.get.yaml
+    post:
+      $ref: ./paths/roles/roles.post.yaml
+  /roles/{id}:
+    put:
+      $ref: ./paths/roles/roles.put.yaml
+    delete:
+      $ref: ./paths/roles/roles.delete.yaml
