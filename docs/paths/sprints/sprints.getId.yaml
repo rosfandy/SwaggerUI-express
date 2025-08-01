@@ -1,0 +1,5 @@
+# sprint.getId.yaml
+tags:
+  - Sprints
+security:
+  - BearerAuth: []

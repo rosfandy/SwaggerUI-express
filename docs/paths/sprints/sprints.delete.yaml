@@ -1,0 +1,44 @@
+# sprint.delete.yaml
+tags:
+  - Sprints
+security:
+  - BearerAuth: []
+summary: Hapus sprint
+description: Menghapus sprint berdasarkan ID
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: integer
+    description: ID sprint yang ingin dihapus
+responses:
+  "200":
+    description: Sprint berhasil dihapus
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: "null"
+              example: null
+            message:
+              type: string
+              example: Sprint deleted successfully
+            success:
+              type: boolean
+              example: true
+  "404":
+    description: Sprint tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              example: Sprint tidak ditemukan
+            success:
+              type: boolean
+              example: false

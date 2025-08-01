@@ -18,6 +18,9 @@ servers:
 paths:
   /hello:
     $ref: ./paths/hello/hello.get.yaml
+  /auth/login:
+    post:
+      $ref: ./paths/auth/login.post.yaml
   /levels:
     get:
       $ref: ./paths/levels/levels.get.yaml
@@ -70,9 +73,6 @@ paths:
       $ref: ./paths/projects/projects.put.yaml
     delete:
       $ref: ./paths/projects/projects.delete.yaml
-  /auth/login:
-    post:
-      $ref: ./paths/auth/login.post.yaml
   /holidays:
     get:
       $ref: ./paths/holidays/holidays.get.yaml
@@ -93,6 +93,18 @@ paths:
       $ref: ./paths/backlog_items/backlog_items.put.yaml
     delete:
       $ref: ./paths/backlog_items/backlog_items.delete.yaml
+  /sprints:
+    get:
+      $ref: ./paths/sprints/sprints.get.yaml
+    post:
+      $ref: ./paths/sprints/sprints.post.yaml
+  /sprints/{id}:
+    # get:
+    #   $ref: ./paths/sprints/sprints.getId.yaml
+    put:
+      $ref: ./paths/sprints/sprints.put.yaml
+    delete:
+      $ref: ./paths/sprints/sprints.delete.yaml
   /statuses:
     get:
       $ref: ./paths/statuses/statuses.get.yaml

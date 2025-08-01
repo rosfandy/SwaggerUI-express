@@ -1,5 +1,7 @@
 tags:
   - Titles
+security:
+  - BearerAuth: []
 summary: Perbarui title
 description: Memperbarui title berdasarkan ID
 parameters:
