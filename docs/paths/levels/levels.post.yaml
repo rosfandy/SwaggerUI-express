@@ -1,0 +1,51 @@
+tags:
+  - Levels
+summary: Tambah level
+description: Menambahkan level baru
+security:
+  - BearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+        properties:
+          name:
+            type: string
+            example: Level 3
+responses:
+  "201":
+    description: Level berhasil ditambahkan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/Level'
+            success:
+              type: boolean
+              example: true
+
+components:
+  schemas:
+    Level:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 6
+        name:
+          type: string
+          example: Level 3
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:20:27.879181+07:00"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:20:27.879181+07:00"

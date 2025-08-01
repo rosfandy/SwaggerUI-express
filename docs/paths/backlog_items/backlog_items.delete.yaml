@@ -1,0 +1,45 @@
+# backlog_items.delete.yaml
+tags:
+  - backlog_items
+summary: Hapus backlog item
+description: Menghapus backlog item berdasarkan ID
+security:
+  - BearerAuth: []  
+parameters:
+  - name: id
+    in: path  
+    required: true
+    schema:
+      type: integer 
+      description: ID backlog item yang ingin dihapus
+responses:
+  "200":
+    description: Backlog item berhasil dihapus
+    content:  
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              nullable: true
+              type: object
+              example: null
+            message:
+              type: string
+              example: Backlog item berhasil dihapus
+            success:
+              type: boolean
+              example: true
+  "404":
+    description: Backlog item tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:  
+              type: string
+              example: Data tidak ditemukan
+            success:
+              type: boolean
+              example: false

@@ -8,8 +8,6 @@ const watcher = chokidar.watch(pathsToWatch, {
   ignoreInitial: true,
 });
 
-console.log("👀 Watching OpenAPI files for changes...");
-
 watcher.on("change", (path) => {
   console.log(`📄 File changed: ${path}`);
   console.log("🔄 Running script...");

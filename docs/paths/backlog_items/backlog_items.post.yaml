@@ -1,0 +1,100 @@
+tags:
+  - backlog_items
+summary: Tambah backlog item
+description: Menambahkan backlog item baru
+security:
+  - BearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+          - user_id
+          - estimate
+          - start_date
+          - end_date
+          - priority
+          - description 
+          - statuse_id
+        properties:
+          name: 
+            type: string
+            example: "backlog item 1"
+          user_id:
+            type: integer
+            example: 17
+          estimate:
+            type: integer 
+            example: 5
+          start_date:
+            type: string
+            example: "01-01-2025"  # dd-mm-yyyy sesuai Postman
+          end_date:
+            type: string
+            example: "01-02-2025"  # dd-mm-yyyy sesuai Postman
+          priority:
+            type: string
+            example: "High"
+          description:
+            type: string
+            example: "backlog item 1 created"
+          statuse_id:
+            type: integer
+            example: 1
+responses:
+  "201":
+    description: Backlog item berhasil ditambahkan
+    content:  
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/BacklogItem'
+            success:
+              type: boolean
+              example: true
+components:
+  schemas:
+    BacklogItem:
+      title: BacklogItem
+      type: object
+      properties:         
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: "backlog item 1"
+        user_id:
+          type: integer
+          example: 17
+        estimate:
+          type: integer
+          example: 5  
+        start_date:
+          type: string
+          example: "01-01-2025"
+        end_date:
+          type: string
+          example: "01-02-2025"
+        priority: 
+          type: string
+          example: "High"
+        description:
+          type: string
+          example: "backlog item 1 created"
+        statuse_id:
+          type: integer
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:20:27.879181+07:00"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2025-07-04T16:20:27.879181+07:00"

@@ -1,7 +1,9 @@
 tags:
-  - Users
-summary: Tambah pengguna
-description: Menambahkan pengguna baru
+  - Holidays
+summary: Tambah hari libur
+description: Menambahkan hari libur baru
+security:
+  - BearerAuth: []
 requestBody:
   required: true
   content:
@@ -10,58 +12,48 @@ requestBody:
         type: object
         required:
           - name
-          - email
-          - password
+          - date
         properties:
           name:
             type: string
-            example: nmae6
-          email:
+            example: Lebaran
+          date:
             type: string
-            example: name6@gmail.com
-          password:
-            type: string
-            example: name6abcde
+            example: "2025-07-20T00:00:00Z"
 responses:
   "201":
-    description: Pengguna berhasil ditambahkan
+    description: Hari libur berhasil ditambahkan
     content:
       application/json:
         schema:
           type: object
           properties:
             data:
-              $ref: "#/components/schemas/User"
+              $ref: '#/components/schemas/Holiday'
             success:
               type: boolean
               example: true
 
 components:
   schemas:
-    User:
+    Holiday:
       type: object
       properties:
         id:
           type: integer
-          example: 4
-        title_id:
-          type: integer
-          example: 0
+          example: 6
         name:
           type: string
-          example: name6
-        email:
+          example: "Lebaran"
+        date:
           type: string
-          format: email
-          example: name6@gmail.com
-        password:
-          type: string
-          example: name6abcde
+          format: date-time
+          example: "2025-07-20T00:00:00Z"
         created_at:
           type: string
           format: date-time
-          example: "2023-10-01T12:00:00Z"
+          example: "2025-07-04T16:20:27.879181+07:00"
         updated_at:
           type: string
           format: date-time
-          example: "2023-10-01T12:00:00Z"
+          example: "2025-07-04T16:20:27.879181+07:00"

@@ -1,0 +1,66 @@
+tags:
+  - Auth
+summary: Login
+description: Login dan mendapatkan token JWT
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            type: string
+            format: email
+            example: dane@gmail.com
+          password:
+            type: string
+            format: password
+            example: rahasia123
+responses:
+  "200":
+    description: Login berhasil
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/LoginResponse'
+            success:
+              type: boolean
+              example: true
+  "500":
+    description: Login gagal (email tidak ditemukan atau password salah)
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              example: Data tidak ditemukan / Password tidak sesuai
+            success:
+              type: boolean
+              example: false
+
+components:
+  schemas:
+    LoginResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3
+        name:
+          type: string
+          example: Dane
+        email:
+          type: string
+          example: dane@gmail.com
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...

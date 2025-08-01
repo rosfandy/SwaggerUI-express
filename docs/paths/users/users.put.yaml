@@ -1,30 +1,38 @@
 tags:
   - Users
-summary: Tambah pengguna
-description: Menambahkan pengguna baru
+summary: Ubah pengguna
+description: Mengubah data pengguna yang sudah ada
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: integer
+    description: ID penggguna yang akan diubah
 requestBody:
   required: true
   content:
     application/json:
       schema:
         type: object
-        required:
+        requuired:
           - name
           - email
           - password
         properties:
           name:
             type: string
-            example: nmae6
+            example: halohai
           email:
             type: string
-            example: name6@gmail.com
+            format: email
+            example: halohai@gmail.com
           password:
             type: string
-            example: name6abcde
+            example: halohaiabcde
 responses:
-  "201":
-    description: Pengguna berhasil ditambahkan
+  "200":
+    description: Pengguna berhasil diubah
     content:
       application/json:
         schema:
@@ -35,6 +43,19 @@ responses:
             success:
               type: boolean
               example: true
+"404":
+  description: Pengguna tidak ditemukan
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          message:
+            type: string
+            example: Pengguna tidak ditemukan
+          success:
+            type: boolean
+            example: false
 
 components:
   schemas:
@@ -43,20 +64,20 @@ components:
       properties:
         id:
           type: integer
-          example: 4
+          example: 6
         title_id:
           type: integer
           example: 0
         name:
           type: string
-          example: name6
+          example: halohai
         email:
           type: string
           format: email
-          example: name6@gmail.com
+          example: halohai@gmail.com
         password:
           type: string
-          example: name6abcde
+          example: halohaiabcde
         created_at:
           type: string
           format: date-time

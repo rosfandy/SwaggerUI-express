@@ -1,0 +1,44 @@
+tags:
+  - Holidays
+summary: Hapus hari libur
+description: Menghapus data hari libur berdasarkan ID
+security:
+  - BearerAuth: []
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: integer
+    description: ID hari libur yang ingin dihapus
+responses:
+  "200":
+    description: Hari libur berhasil dihapus
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              nullable: true
+              type: object
+              example: null
+            message:
+              type: string
+              example: Hari libur berhasil dihapus
+            success:
+              type: boolean
+              example: true
+  "404":
+    description: Hari libur tidak ditemukan
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              example: Data tidak ditemukan
+            success:
+              type: boolean
+              example: false

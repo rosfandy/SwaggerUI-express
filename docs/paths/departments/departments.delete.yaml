@@ -1,0 +1,40 @@
+tags:
+  - Departments
+summary: Hapus departemen
+description: Menghapus departemen berdasarkan ID
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: ID departemen
+    schema:
+      type: integer
+responses:
+  "200":
+    description: Departemen berhasil dihapus
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: string
+              nullable: true
+              example: null
+            message:
+              type: string
+              example: "Department deleted successfully"
+            success:
+              type: boolean
+  "400":
+    description: Permintaan tidak valid
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+            success:
+              type: boolean
+              example: false

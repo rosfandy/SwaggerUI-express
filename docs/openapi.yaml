@@ -3,13 +3,103 @@ info:
   title: OpenAPI
   description: Dokumentasi OpenAPI
   version: 1.0.0
+  security:
+    - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 servers:
-  - url: http://localhost:5123/api
+  - url: http://127.0.0.1:5000/api/v1
+  - url: http://127.0.0.1:5123/api/v1
+  - url: https://jk-go-52014148654.asia-southeast2.run.app/api/v1
 paths:
   /hello:
     $ref: ./paths/hello/hello.get.yaml
+  /levels:
+    get:
+      $ref: ./paths/levels/levels.get.yaml
+    post:
+      $ref: ./paths/levels/levels.post.yaml
+  /levels/{id}:
+    put:
+      $ref: ./paths/levels/levels.put.yaml
+    get:
+      $ref: ./paths/levels/levels.put.yaml
+    post:
+      $ref: ./paths/levels/levels.delete.yaml
+  /titles:
+    get:
+      $ref: ./paths/titles/titles.get.yaml
+    post:
+      $ref: ./paths/titles/titles.post.yaml
+  /titles/{id}:
+    put:
+      $ref: ./paths/titles/titles.put.yaml
+    delete:
+      $ref: ./paths/titles/titles.delete.yaml
+  /positions:
+    get:
+      $ref: ./paths/positions/positions.get.yaml
+    post:
+      $ref: ./paths/positions/positions.post.yaml
+  /positions/{id}:
+    put:
+      $ref: ./paths/positions/positions.put.yaml
+    delete:
+      $ref: ./paths/positions/positions.delete.yaml
   /users:
     get:
       $ref: ./paths/users/users.get.yaml
     post:
       $ref: ./paths/users/users.post.yaml
+  /users/{id}:
+    put:
+      $ref: ./paths/users/users.put.yaml
+    delete:
+      $ref: ./paths/users/users.delete.yaml
+  /projects:
+    get:
+      $ref: ./paths/projects/projects.get.yaml
+    post:
+      $ref: ./paths/projects/projects.post.yaml
+  /projects/{id}:
+    put:
+      $ref: ./paths/projects/projects.put.yaml
+    delete:
+      $ref: ./paths/projects/projects.delete.yaml
+  /auth/login:
+    post:
+      $ref: ./paths/auth/login.post.yaml
+  /holidays:
+    get:
+      $ref: ./paths/holidays/holidays.get.yaml
+    post:
+      $ref: ./paths/holidays/holidays.post.yaml
+  /holidays/{id}:
+    put:
+      $ref: ./paths/holidays/holidays.put.yaml
+    delete:
+      $ref: ./paths/holidays/holidays.delete.yaml
+  /backlog_items:
+    get:
+      $ref: ./paths/backlog_items/backlog_items.get.yaml
+    post:
+      $ref: ./paths/backlog_items/backlog_items.post.yaml
+  /backlog_items/{id}:
+    put:
+      $ref: ./paths/backlog_items/backlog_items.put.yaml
+    delete:
+      $ref: ./paths/backlog_items/backlog_items.delete.yaml
+  /statuses:
+    get:
+      $ref: ./paths/statuses/statuses.get.yaml
+    post:
+      $ref: ./paths/statuses/statuses.post.yaml
+  /statuses/{id}:
+    put:
+      $ref: ./paths/statuses/statuses.put.yaml
+    delete:
+      $ref: ./paths/statuses/statuses.delete.yaml

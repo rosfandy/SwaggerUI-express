@@ -74,7 +74,7 @@
 1. Run command
 
    ```javascript
-   npx generate <resource_name>
+   node generate.js <resource_name>
    ```
 
 2. Edit generated file `.yaml`
