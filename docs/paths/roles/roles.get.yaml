@@ -1,0 +1,104 @@
+tags:
+  - Roles
+summary: Ambil semua peran
+description: Mengembalikan data semua peran
+responses:
+  "200":
+    description: Berhasil
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  has_permission:
+                    type: array
+                    nullable: true
+                    example: null
+                  has_user:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        title_id:
+                          type: integer
+                        name:
+                          type: string
+                        email:
+                          type: string
+                        email_verified_at:
+                          type: string
+                          format: date-time
+                        remember_token:
+                          type: string
+                          nullable: true
+                        custom_fields:
+                          type: string
+                        avatar_url:
+                          type: string
+                        created_at:
+                          type: string
+                          format: date-time
+                        updated_at:
+                          type: string
+                          format: date-time
+                        title:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                              example: ""
+                            department_id:
+                              type: integer
+                            position_id:
+                              type: integer
+                            level_id:
+                              type: integer
+                            created_at:
+                              type: string
+                              format: date-time
+                              example: "0001-01-01T00:00:00Z"
+                            updated_at:
+                              type: string
+                              format: date-time
+                              example: "0001-01-01T00:00:00Z"
+                            department:
+                              type: object
+                              nullable: true
+                              example: null
+                            position:
+                              type: object
+                              nullable: true
+                              example: null
+                            level:
+                              type: object
+                              nullable: true
+                              example: null
+                        squads:
+                          type: object
+                          nullable: true
+                          example: null
+                        has_roles:
+                          type: object
+                          nullable: true
+                          example: null
+            success:
+              type: boolean

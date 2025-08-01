@@ -76,11 +76,11 @@ responses:
                       updated_at:
                         type: string
                         format: date-time
-                      SquadMembers:
+                      users:
                         type: array
                         nullable: true
                         example: null
-                      has_project:
+                      projects:
                         type: object
                         nullable: true
                         example: null

@@ -1,0 +1,137 @@
+tags:
+  - Roles
+summary: Update peran
+description: Memperbarui informasi peran berdasarkan ID
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: ID peran
+    schema:
+      type: integer
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+          - user_has_roles
+        properties:
+          name:
+            type: string
+          user_has_roles:
+            type: array
+            items:
+              type: integer
+responses:
+  "200":
+    description: Peran berhasil diperbarui
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                created_at:
+                  type: string
+                  format: date-time
+                updated_at:
+                  type: string
+                  format: date-time
+                has_permission:
+                  type: array
+                  nullable: true
+                  example: null
+                has_user:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      title_id:
+                        type: integer
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      email_verified_at:
+                        type: string
+                        format: date-time
+                      remember_token:
+                        type: string
+                        nullable: true
+                      custom_fields:
+                        type: string
+                      avatar_url:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                      title:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+                            example: ""
+                          department_id:
+                            type: integer
+                          position_id:
+                            type: integer
+                          level_id:
+                            type: integer
+                          created_at:
+                            type: string
+                            format: date-time
+                            example: "0001-01-01T00:00:00Z"
+                          updated_at:
+                            type: string
+                            format: date-time
+                            example: "0001-01-01T00:00:00Z"
+                          department:
+                            type: object
+                            nullable: true
+                            example: null
+                          position:
+                            type: object
+                            nullable: true
+                            example: null
+                          level:
+                            type: object
+                            nullable: true
+                            example: null
+                      squads:
+                        type: object
+                        nullable: true
+                        example: null
+                      has_roles:
+                        type: object
+                        nullable: true
+                        example: null
+            success:
+              type: boolean
+  "400":
+    description: Permintaan tidak valid
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+            success:
+              type: boolean
+              example: false

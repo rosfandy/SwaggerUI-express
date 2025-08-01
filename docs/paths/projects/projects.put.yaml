@@ -64,31 +64,8 @@ responses:
                   format: date-time
                 team:
                   type: array
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      project_id:
-                        type: integer
-                      name:
-                        type: string
-                      code:
-                        type: string
-                      created_at:
-                        type: string
-                        format: date-time
-                      updated_at:
-                        type: string
-                        format: date-time
-                      SquadMembers:
-                        type: array
-                        nullable: true
-                        example: null
-                      has_project:
-                        type: object
-                        nullable: true
-                        example: null
+                  nullable: true
+                  example: null
             success:
               type: boolean
   "400":
